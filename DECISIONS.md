@@ -97,6 +97,18 @@ alineación perfecta (con 5 ms de error, empeora).
 
 ---
 
+## Pruebas reales en celular (Android 10, Chrome 156) — 2026-11-08
+Página `experiments/h-celular` (micrófono y bocina del mismo teléfono), datos del diagnóstico del usuario:
+- La cadena completa funciona: audio a 48 kHz, AudioWorklet estable (~94 datos/s), sin errores.
+- **Eco ON aplana la voz:** diferencia normal→fuerte de 1,3 dB en tres calibraciones. La prueba libre parpadeó
+  (20 cambios en 30 s, 14 % de nivel alto sin voz). → **En celular, eco OFF por defecto.**
+- **Eco OFF:** la mejor calibración dio 6,3 dB normal→fuerte (ideal ≥ 8). Prueba libre con música sonando:
+  9 cambios en 30 s y **0 % de nivel alto sin voz**. Comportamiento aceptable.
+- El rango dinámico del micrófono del teléfono es corto (normal ≈ −25 dBFS, fuerte ≈ −18 dBFS): la calibración
+  debe pedir explícitamente "más fuerte" y rechazar diferencias < 4 dB.
+- **"Brillo" de la voz (agudos/graves) no sirve de respaldo** en este teléfono: −2,9 dB y +1 dB, sin patrón. Descartado.
+- Pendiente: prueba de silencio con eco OFF y música por la bocina (fuga).
+
 ## Pendiente de probar en dispositivo (usuario)
 - [ ] Latencia real de entrada/salida en tablet y celular (`a-captura`).
 - [ ] Filtros ON vs OFF con el micrófono real.
