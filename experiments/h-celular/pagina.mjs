@@ -9,31 +9,70 @@ let ctx,stream,source,worklet,musicGain,loopTimer=null,nextLoop=0,config,last=nu
 const VOL_POR_NIVEL=[0,.3,.5,.75,1]; // volumen relativo de la música para niveles 1–4
 const status=s=>{$('#status').textContent=s;};
 const log=x=>{$('#log').textContent=JSON.stringify(x,null,2);};
-const safely=fn=>async()=>{try{await fn();}catch(e){status('Error: '+e.message);log({error:String(e.stack||e)});}};
+const safely=fn=>async()=>{try{await fn();}catch(e){status('Error: '+e.message);log({error:String(e.stack||e)});fallo(diag?.paso??'acción',e);}};
 
 // Calibración por defecto (voz sintética) hasta que el usuario calibre la suya.
 const defaultCal=fetch('../../test-audio/calibracion.wav').then(r=>r.arrayBuffer()).then(b=>{config=calibrate(decodeWav(b).samples,winnerId);});
 
+// ---- Diagnóstico visible: para saber en el teléfono qué parte funciona y cuál no ----
+const diag={navegador:navigator.userAgent,paso:'sin iniciar',contexto:'-',frecuencia_hz:'-',mensajes_procesador:0,microfono_db:'-',errores:[]};
+let analyser=null,meterBuf=null;
+function fallo(donde,e){diag.errores.push(donde+': '+(e?.message||e));pintarDiag();}
+window.addEventListener('error',e=>fallo('página',e.message));
+window.addEventListener('unhandledrejection',e=>fallo('promesa',e.reason));
+function pintarDiag(){
+  const ok=v=>v?'✔':'✖';
+  const rows=[
+    ['1. Audio encendido',ok(diag.contexto==='running')+' '+diag.contexto],
+    ['2. Micrófono llega',ok(diag.microfono_db!=='-'&&diag.microfono_db>-90)+' '+diag.microfono_db+' dB'],
+    ['3. Analizador de voz',ok(diag.mensajes_procesador>0)+' '+diag.mensajes_procesador+' datos'],
+    ['Frecuencia',diag.frecuencia_hz+' Hz'],['Paso',diag.paso]];
+  $('#diag').replaceChildren(...rows.map(([k,v])=>{const e=document.createElement('div');e.className='metric';e.textContent=k;const b=document.createElement('strong');b.textContent=v;e.append(b);return e;}));
+  $('#errores').textContent=diag.errores.join('\n');
+}
+// Medidor directo del micrófono (AnalyserNode), independiente del analizador de voz.
+function medidor(){
+  if(!analyser)return;
+  analyser.getFloatTimeDomainData(meterBuf);
+  let s=0;for(const v of meterBuf)s+=v*v;
+  const db=10*Math.log10(s/meterBuf.length+1e-12);
+  diag.microfono_db=Math.round(db);diag.contexto=ctx?.state??'-';
+  $('#crudo').style.width=Math.max(0,Math.min(100,(db+80)/80*100))+'%';
+  pintarDiag();requestAnimationFrame(medidor);
+}
+
 async function iniciar(){
-  await detener();await defaultCal;
-  // iOS 17+: permite grabar y reproducir a la vez aunque el interruptor de silencio esté puesto (si el sistema lo respeta).
+  await detener();
+  // IMPORTANTE (iPhone): crear y encender el audio en el mismo instante del toque, antes de cualquier espera.
   try{if(navigator.audioSession)navigator.audioSession.type='play-and-record';}catch{}
-  ctx=new AudioContext({sampleRate:48000,latencyHint:'interactive'});await ctx.resume();
+  // Sin forzar 48 kHz: se usa la frecuencia nativa del teléfono (en iPhone forzarla puede dar silencio).
+  ctx=new AudioContext({latencyHint:'interactive'});const encender=ctx.resume();
+  diag.paso='pidiendo micrófono';diag.errores=[];pintarDiag();
   const opciones={channelCount:1,echoCancellation:$('#aec').checked,noiseSuppression:$('#ns').checked,autoGainControl:$('#agc').checked};
   stream=await navigator.mediaDevices.getUserMedia({audio:opciones});
+  await encender;await defaultCal;
+  diag.frecuencia_hz=ctx.sampleRate;diag.contexto=ctx.state;
   source=ctx.createMediaStreamSource(stream);
+  analyser=ctx.createAnalyser();analyser.fftSize=2048;meterBuf=new Float32Array(analyser.fftSize);source.connect(analyser);
+  requestAnimationFrame(medidor);
+  diag.paso='cargando analizador';pintarDiag();
   await ctx.audioWorklet.addModule('../b-energia/energia-worklet.mjs');
   worklet=new AudioWorkletNode(ctx,'energia');
+  worklet.onprocessorerror=e=>fallo('analizador',e.message||'error interno del procesador');
   worklet.port.onmessage=({data})=>{
-    if(data.calibration){config=calibrate(data.calibration,winnerId,ctx.sampleRate);worklet.port.postMessage({method:winnerId,config});status('✔ Calibración aplicada con tu voz.');log({calibracion:config});return;}
+    diag.mensajes_procesador++;
+    if(data.calibration){try{config=calibrate(data.calibration,winnerId,ctx.sampleRate);worklet.port.postMessage({method:winnerId,config});status('✔ Calibración aplicada con tu voz.');log({calibracion:config});}catch(e){fallo('calibración',e);}return;}
     mostrar(data);
   };
   worklet.port.postMessage({method:winnerId,config});
   const mute=ctx.createGain();mute.gain.value=0;source.connect(worklet).connect(mute).connect(ctx.destination);
   musicGain=ctx.createGain();musicGain.gain.value=0;musicGain.connect(ctx.destination);
   const s=stream.getAudioTracks()[0].getSettings();
+  diag.paso='listo';diag.ajustes=s;pintarDiag();
   log({ajustes_reales_microfono:s,frecuencia:ctx.sampleRate,baseLatency_ms:ctx.baseLatency*1000,outputLatency_ms:(ctx.outputLatency||0)*1000});
-  status(`Micrófono activo · eco ${s.echoCancellation?'ON':'OFF'} · ruido ${s.noiseSuppression?'ON':'OFF'} · AGC ${s.autoGainControl?'ON':'OFF'}`+(ctx.sampleRate!==48000?' · ⚠ frecuencia distinta de 48 kHz':''));
+  status(`Micrófono activo · eco ${s.echoCancellation?'ON':'OFF'} · ruido ${s.noiseSuppression?'ON':'OFF'} · AGC ${s.autoGainControl?'ON':'OFF'}`);
+  // Si a los 2 s el analizador no ha mandado nada, avisarlo claramente.
+  setTimeout(()=>{if(ctx&&diag.mensajes_procesador===0)fallo('analizador','no envía datos (audio: '+ctx.state+'). Toca "Detener" y otra vez "Iniciar".');},2000);
 }
 
 async function detener(){
@@ -41,7 +80,7 @@ async function detener(){
   try{source?.disconnect();}catch{}
   stream?.getTracks().forEach(t=>t.stop());
   if(ctx&&ctx.state!=='closed')await ctx.close();
-  ctx=stream=source=worklet=musicGain=null;leakTest=null;status('Detenido.');
+  ctx=stream=source=worklet=musicGain=analyser=null;leakTest=null;status('Detenido.');
 }
 
 function volumenMusica(){
@@ -105,3 +144,11 @@ $('#parar').onclick=()=>pararMusica();
 $('#volumen').oninput=()=>volumenMusica();
 $('#reacciona').onchange=()=>volumenMusica();
 $('#fuga').onclick=()=>{if(!worklet){status('Primero inicia el micrófono.');return;}if(loopTimer===null)tocarMusica();$('#veredicto').className='';leakTest={inicio:performance.now(),muestras:[]};};
+
+// Copiar diagnóstico para pegarlo en el chat.
+$('#copiar').onclick=async()=>{
+  const texto=JSON.stringify({...diag,ultimo_dato:last,config},null,1);
+  try{await navigator.clipboard.writeText(texto);$('#copiar').textContent='✔ Copiado: pégalo en el chat';}
+  catch{$('#log').textContent=texto;document.querySelector('details').open=true;$('#copiar').textContent='Selecciona el texto de abajo y cópialo';}
+};
+pintarDiag();

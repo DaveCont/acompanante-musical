@@ -29,6 +29,12 @@
     <label><input id="agc" type="checkbox"> Control automático de volumen (no recomendado)</label>
     <div class="fila"><button id="iniciar">▶ Iniciar micrófono</button><button id="detener">■ Detener todo</button></div>
     <p id="status" class="status">Sin iniciar.</p>
+    <h3>¿Funciona? (diagnóstico)</h3>
+    <p>Señal directa del micrófono (debe moverse al hablar):</p>
+    <div style="background:#08101b;border-radius:8px;height:28px;overflow:hidden"><div id="crudo" style="height:100%;width:0;background:#7dd6f5;transition:width .05s"></div></div>
+    <div class="grid" id="diag" style="margin-top:10px"></div>
+    <pre id="errores" class="mal"></pre>
+    <button id="copiar">📋 Copiar diagnóstico</button>
   </section>
 
   <div id="nivel">–<small>nivel detectado</small></div>
