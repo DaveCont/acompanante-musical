@@ -54,6 +54,15 @@
   <canvas id="barra" width="1000" height="120" aria-label="Energía de la voz y umbrales"></canvas>
   <div class="grid" id="metrics"></div>
 
+  <section class="panel" style="border-color:#7dd6f5">
+    <h2>★ Prueba guiada: eco ON vs eco OFF</h2>
+    <p>Un solo botón. La página calibra dos veces seguidas: primero con cancelación de eco y luego sin ella.
+       Cada vez: <b>5 s voz normal</b> y <b>5 s voz FUERTE</b> (como en el clímax). Sigue las instrucciones de la barra de arriba.
+       Mantén el teléfono a la misma distancia las dos veces.</p>
+    <button id="guiada">★ Empezar prueba guiada (≈30 s)</button>
+    <p id="guiadares" style="white-space:pre-wrap"></p>
+  </section>
+
   <section class="panel">
     <h2>2 · Calibrar tu voz (sin música)</h2>
     <p>Pulsa y habla 5 s normal, luego 5 s fuerte, como en el clímax del sermón.</p>
@@ -87,6 +96,6 @@
   </section>
 
   <details><summary>Datos técnicos</summary><pre id="log"></pre></details>
-  <script type="module" src="./pagina.mjs?v=5"></script>
+  <script type="module" src="./pagina.mjs?v=6"></script>
 </body>
 </html>

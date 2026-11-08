@@ -5,7 +5,7 @@ import {decodeWav} from '../shared/wav.mjs';
 import {scheduleProgression,LOOP_SECONDS} from '../shared/sound.mjs';
 
 const $=s=>document.querySelector(s);
-let historia=[],libre=null,musicaObjetivo=0,ctx,stream,source,worklet,musicGain,loopTimer=null,nextLoop=0,config,last=null,leakTest=null;
+let calEspera=null,brillo=null,historia=[],libre=null,musicaObjetivo=0,ctx,stream,source,worklet,musicGain,loopTimer=null,nextLoop=0,config,last=null,leakTest=null;
 const VOL_POR_NIVEL=[0,.3,.5,.75,1]; // volumen relativo de la música para niveles 1–4
 const status=s=>{$('#status').textContent=s;const f=$('#fijomsg');if(f)f.textContent=s;};
 const log=x=>{$('#log').textContent=JSON.stringify(x,null,2);};
@@ -61,7 +61,7 @@ async function iniciar(){
   worklet.onprocessorerror=e=>fallo('analizador',e.message||'error interno del procesador');
   worklet.port.onmessage=({data})=>{
     diag.mensajes_procesador++;
-    if(data.calibration){try{config=calibrate(data.calibration,winnerId,ctx.sampleRate);worklet.port.postMessage({method:winnerId,config});{const dif=config.fuerte_db-config.normal_db,eco=$('#aec').checked?'eco ON':'eco OFF';diag.calibraciones=(diag.calibraciones||[]).concat({eco,normal_db:+config.normal_db.toFixed(1),fuerte_db:+config.fuerte_db.toFixed(1),diferencia_db:+dif.toFixed(1)});status(`✔ Calibrado (${eco}). Diferencia normal→fuerte: ${dif.toFixed(1)} dB `+(dif>=8?'✔ buena':'✖ muy poca (ideal 8 dB o más)'));}log({calibracion:config});}catch(e){fallo('calibración',e);}return;}
+    if(data.calibration){try{config=calibrate(data.calibration,winnerId,ctx.sampleRate);worklet.port.postMessage({method:winnerId,config});{const dif=config.fuerte_db-config.normal_db,eco=$('#aec').checked?'eco ON':'eco OFF';diag.calibraciones=(diag.calibraciones||[]).concat({eco,normal_db:+config.normal_db.toFixed(1),fuerte_db:+config.fuerte_db.toFixed(1),diferencia_db:+dif.toFixed(1)});status(`✔ Calibrado (${eco}). Diferencia normal→fuerte: ${dif.toFixed(1)} dB `+(dif>=8?'✔ buena':'✖ muy poca (ideal 8 dB o más)'));}if(calEspera){calEspera(diag.calibraciones.at(-1));calEspera=null;}log({calibracion:config});}catch(e){fallo('calibración',e);}return;}
     mostrar(data);
   };
   worklet.port.postMessage({method:winnerId,config});
@@ -166,6 +166,49 @@ function terminarFuga(){
 
 $('#iniciar').onclick=safely(iniciar);
 $('#detener').onclick=safely(detener);
+// ---- Brillo de la voz: agudos (1,5–5 kHz) frente a graves (150–1000 Hz). Sube con el esfuerzo vocal
+// aunque el teléfono comprima el volumen. Se mide solo mientras hay voz.
+function iniciarBrillo(){
+  const fb=new Float32Array(analyser.frequencyBinCount),hz=ctx.sampleRate/analyser.fftSize,inicio=performance.now();
+  const suma=(a,b)=>{let t=0;for(let i=Math.round(a/hz);i<=Math.round(b/hz);i++)t+=10**(fb[i]/10);return t;};
+  brillo={normal:[],fuerte:[]};
+  brillo.timer=setInterval(()=>{
+    const t=(performance.now()-inicio)/1000;if(!analyser||!last?.voice)return;
+    analyser.getFloatFrequencyData(fb);const v=10*Math.log10(suma(1500,5000)/(suma(150,1000)+1e-20));
+    if(t>1&&t<5)brillo.normal.push(v);else if(t>6&&t<10)brillo.fuerte.push(v);
+  },100);
+}
+function terminarBrillo(){
+  clearInterval(brillo.timer);const med=a=>a.length?a.sort((x,y)=>x-y)[a.length>>1]:NaN;
+  const r={brillo_normal_db:+med(brillo.normal).toFixed(1),brillo_fuerte_db:+med(brillo.fuerte).toFixed(1)};r.brillo_diferencia_db=+(r.brillo_fuerte_db-r.brillo_normal_db).toFixed(1);brillo=null;return r;
+}
+async function calibrarConBrillo(){
+  pararMusica();const fin=new Promise(r=>calEspera=r);iniciarBrillo();worklet.port.postMessage({calibrate:true});
+  const cal=await fin;return {...cal,...terminarBrillo()};
+}
+const espera=ms=>new Promise(r=>setTimeout(r,ms));
+// ---- Prueba guiada: calibra con eco ON y luego con eco OFF, sin tocar casillas.
+async function guiada(){
+  const out=$('#guiadares');out.textContent='';const resultados=[];
+  for(const eco of [true,false]){
+    $('#aec').checked=eco;$('#ns').checked=false;$('#agc').checked=false;
+    await iniciar();
+    for(let i=3;i>0;i--){status(`Prueba ${eco?'1/2 (eco ON)':'2/2 (eco OFF)'}: prepárate… ${i}`);await espera(1000);}
+    resultados.push(await calibrarConBrillo());
+    out.textContent=resultados.map(r=>`${r.eco}: volumen normal→fuerte ${r.diferencia_db} dB · brillo ${r.brillo_diferencia_db} dB`).join(String.fromCharCode(10));
+  }
+  diag.guiada=resultados;
+  const [on,off]=resultados,mejor=off.diferencia_db>on.diferencia_db+3?'eco OFF':'eco ON';
+  out.textContent+=`
+
+Volumen: ${off.diferencia_db>=8||on.diferencia_db>=8?'✔ al menos un modo distingue normal de fuerte':'✖ ningún modo distingue bien por volumen'} (mejor: ${mejor}).`+
+    `
+Brillo: ${Math.max(on.brillo_diferencia_db,off.brillo_diferencia_db)>=3?'✔ el brillo sí cambia al subir la voz (sirve de respaldo)':'✖ el brillo cambia poco'}.`+
+    `
+Ahora toca 📤 Compartir y mándame el diagnóstico.`;
+  status('✔ Prueba guiada terminada. Quedó calibrado con eco OFF.');
+}
+$('#guiada').onclick=safely(guiada);
 $('#calibrar').onclick=()=>{if(!worklet){status('Primero inicia el micrófono.');return;}pararMusica();worklet.port.postMessage({calibrate:true});};
 $('#musica').onclick=safely(async()=>tocarMusica());
 $('#parar').onclick=()=>pararMusica();
@@ -175,7 +218,7 @@ $('#libre').onclick=()=>{if(!worklet){status('Primero inicia el micrófono (secc
 $('#fuga').onclick=()=>{if(!worklet){status('Primero inicia el micrófono.');return;}if(loopTimer===null)tocarMusica();$('#veredicto').className='';leakTest={inicio:performance.now(),muestras:[]};};
 
 // Versión visible, para confirmar que el teléfono no muestra una copia vieja.
-const VERSION='v5 (2026-11-08)';
+const VERSION='v6 (2026-11-08)';
 // Revisión del navegador al cargar.
 const ua=navigator.userAgent;
 diag.compatibilidad={
