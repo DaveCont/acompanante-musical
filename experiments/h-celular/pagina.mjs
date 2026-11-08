@@ -49,7 +49,11 @@ async function iniciar(){
   ctx=new AudioContext({latencyHint:'interactive'});const encender=ctx.resume();
   diag.paso='pidiendo micrófono';diag.errores=[];pintarDiag();
   const opciones={channelCount:1,echoCancellation:$('#aec').checked,noiseSuppression:$('#ns').checked,autoGainControl:$('#agc').checked};
-  stream=await navigator.mediaDevices.getUserMedia({audio:opciones});
+  try{stream=await navigator.mediaDevices.getUserMedia({audio:opciones});}
+  catch(e){ // Android a veces no suelta el micrófono al instante: esperar y reintentar una vez.
+    diag.errores.push('micrófono (reintento): '+e.message);await new Promise(r=>setTimeout(r,1500));
+    stream=await navigator.mediaDevices.getUserMedia({audio:opciones});
+  }
   await encender;await defaultCal;
   diag.frecuencia_hz=ctx.sampleRate;diag.contexto=ctx.state;
   source=ctx.createMediaStreamSource(stream);
@@ -61,7 +65,7 @@ async function iniciar(){
   worklet.onprocessorerror=e=>fallo('analizador',e.message||'error interno del procesador');
   worklet.port.onmessage=({data})=>{
     diag.mensajes_procesador++;
-    if(data.calibration){try{config=calibrate(data.calibration,winnerId,ctx.sampleRate);worklet.port.postMessage({method:winnerId,config});{const dif=config.fuerte_db-config.normal_db,eco=$('#aec').checked?'eco ON':'eco OFF';diag.calibraciones=(diag.calibraciones||[]).concat({eco,normal_db:+config.normal_db.toFixed(1),fuerte_db:+config.fuerte_db.toFixed(1),diferencia_db:+dif.toFixed(1)});status(`✔ Calibrado (${eco}). Diferencia normal→fuerte: ${dif.toFixed(1)} dB `+(dif>=8?'✔ buena':'✖ muy poca (ideal 8 dB o más)'));}if(calEspera){calEspera(diag.calibraciones.at(-1));calEspera=null;}log({calibracion:config});}catch(e){fallo('calibración',e);}return;}
+    if(data.calibration){try{config=calibrate(data.calibration,winnerId,ctx.sampleRate);worklet.port.postMessage({method:winnerId,config});{const dif=config.fuerte_db-config.normal_db,eco=$('#aec').checked?'eco ON':'eco OFF';diag.calibraciones=(diag.calibraciones||[]).concat({eco,normal_db:+config.normal_db.toFixed(1),fuerte_db:+config.fuerte_db.toFixed(1),diferencia_db:+dif.toFixed(1)});status(`✔ Calibrado (${eco}). Diferencia normal→fuerte: ${dif.toFixed(1)} dB `+(dif>=8?'✔ buena':'✖ muy poca (ideal 8 dB o más)'));}if(calEspera){calEspera.resolve(diag.calibraciones.at(-1));calEspera=null;}log({calibracion:config});}catch(e){fallo('calibración',e);if(calEspera){calEspera.reject(e);calEspera=null;}}return;}
     mostrar(data);
   };
   worklet.port.postMessage({method:winnerId,config});
@@ -183,32 +187,52 @@ function terminarBrillo(){
   const r={brillo_normal_db:+med(brillo.normal).toFixed(1),brillo_fuerte_db:+med(brillo.fuerte).toFixed(1)};r.brillo_diferencia_db=+(r.brillo_fuerte_db-r.brillo_normal_db).toFixed(1);brillo=null;return r;
 }
 async function calibrarConBrillo(){
-  pararMusica();const fin=new Promise(r=>calEspera=r);iniciarBrillo();worklet.port.postMessage({calibrate:true});
-  const cal=await fin;return {...cal,...terminarBrillo()};
+  pararMusica();
+  const fin=new Promise((resolve,reject)=>{calEspera={resolve,reject};});
+  iniciarBrillo();worklet.port.postMessage({calibrate:true});
+  // Si en 16 s no terminó, avisar en vez de quedarse esperando.
+  const limite=new Promise((_,reject)=>setTimeout(()=>reject(Error('la calibración no terminó en 16 s (¿el analizador dejó de mandar datos?)')),16000));
+  try{const cal=await Promise.race([fin,limite]);return {...cal,...terminarBrillo()};}
+  catch(e){if(brillo)clearInterval(brillo.timer);brillo=null;calEspera=null;throw e;}
 }
 const espera=ms=>new Promise(r=>setTimeout(r,ms));
+// Bitácora visible de la prueba guiada (también va al diagnóstico).
+function paso(msg){
+  const t=new Date().toLocaleTimeString();diag.guiada_pasos=(diag.guiada_pasos||[]).concat(t+' '+msg);
+  $('#guiadapasos').textContent=diag.guiada_pasos.slice(-12).join('\n');
+}
+let guiadaActiva=false;
 // ---- Prueba guiada: calibra con eco ON y luego con eco OFF, sin tocar casillas.
 async function guiada(){
-  const out=$('#guiadares');out.textContent='';const resultados=[];
-  for(const eco of [true,false]){
-    $('#aec').checked=eco;$('#ns').checked=false;$('#agc').checked=false;
-    await iniciar();
-    for(let i=3;i>0;i--){status(`Prueba ${eco?'1/2 (eco ON)':'2/2 (eco OFF)'}: prepárate… ${i}`);await espera(1000);}
-    resultados.push(await calibrarConBrillo());
-    out.textContent=resultados.map(r=>`${r.eco}: volumen normal→fuerte ${r.diferencia_db} dB · brillo ${r.brillo_diferencia_db} dB`).join(String.fromCharCode(10));
-  }
-  diag.guiada=resultados;
-  const [on,off]=resultados,mejor=off.diferencia_db>on.diferencia_db+3?'eco OFF':'eco ON';
-  out.textContent+=`
-
-Volumen: ${off.diferencia_db>=8||on.diferencia_db>=8?'✔ al menos un modo distingue normal de fuerte':'✖ ningún modo distingue bien por volumen'} (mejor: ${mejor}).`+
-    `
-Brillo: ${Math.max(on.brillo_diferencia_db,off.brillo_diferencia_db)>=3?'✔ el brillo sí cambia al subir la voz (sirve de respaldo)':'✖ el brillo cambia poco'}.`+
-    `
-Ahora toca 📤 Compartir y mándame el diagnóstico.`;
-  status('✔ Prueba guiada terminada. Quedó calibrado con eco OFF.');
+  if(guiadaActiva)return;guiadaActiva=true;$('#guiada').disabled=true;
+  const out=$('#guiadares');out.textContent='';out.className='';const resultados=[];diag.guiada_pasos=[];
+  try{
+    for(const eco of [true,false]){
+      const nombre=eco?'Prueba 1/2 (eco ON)':'Prueba 2/2 (eco OFF)';
+      $('#aec').checked=eco;$('#ns').checked=false;$('#agc').checked=false;
+      paso(nombre+': apagando micrófono anterior…');await detener();await espera(1000);
+      paso(nombre+': abriendo micrófono…');await iniciar();
+      paso(`${nombre}: micrófono listo (audio ${ctx?.state}, eco real ${stream?.getAudioTracks()[0].getSettings().echoCancellation?'ON':'OFF'})`);
+      const antes=diag.mensajes_procesador;await espera(1500);
+      if(diag.mensajes_procesador===antes)throw Error('el analizador no manda datos (audio: '+ctx?.state+')');
+      for(let k=3;k>0;k--){status(`${nombre}: prepárate… ${k}`);$('#guiada').textContent=`${nombre}: prepárate… ${k}`;await espera(1000);}
+      paso(nombre+': calibrando — 5 s NORMAL y 5 s FUERTE');$('#guiada').textContent=nombre+': ¡habla! (mira la barra de arriba)';
+      const r=await calibrarConBrillo();resultados.push(r);
+      paso(`${nombre}: ✔ volumen ${r.diferencia_db} dB · brillo ${r.brillo_diferencia_db} dB`);
+    }
+    diag.guiada=resultados;
+    const [on,off]=resultados,mejor=off.diferencia_db>on.diferencia_db+3?'eco OFF':'eco ON';
+    out.textContent=resultados.map(r=>`${r.eco}: volumen normal→fuerte ${r.diferencia_db} dB · brillo ${r.brillo_diferencia_db} dB`).join('\n')+
+      `\n\nVolumen: ${off.diferencia_db>=8||on.diferencia_db>=8?'✔ al menos un modo distingue normal de fuerte':'✖ ningún modo distingue bien por volumen'} (mejor: ${mejor}).`+
+      `\nBrillo: ${Math.max(on.brillo_diferencia_db,off.brillo_diferencia_db)>=3?'✔ el brillo sí cambia al subir la voz (sirve de respaldo)':'✖ el brillo cambia poco'}.`+
+      `\nAhora toca 📤 Compartir y mándame el diagnóstico.`;
+    status('✔ Prueba guiada terminada. Quedó calibrado con eco OFF.');
+  }catch(e){
+    paso('✖ ERROR: '+e.message);fallo('prueba guiada',e);
+    out.className='mal';out.textContent='✖ La prueba se detuvo: '+e.message+'\nToca 📤 Compartir y mándame el diagnóstico.';
+  }finally{guiadaActiva=false;$('#guiada').disabled=false;$('#guiada').textContent='★ Repetir prueba guiada';}
 }
-$('#guiada').onclick=safely(guiada);
+$('#guiada').onclick=()=>{guiada();};
 $('#calibrar').onclick=()=>{if(!worklet){status('Primero inicia el micrófono.');return;}pararMusica();worklet.port.postMessage({calibrate:true});};
 $('#musica').onclick=safely(async()=>tocarMusica());
 $('#parar').onclick=()=>pararMusica();
@@ -218,7 +242,7 @@ $('#libre').onclick=()=>{if(!worklet){status('Primero inicia el micrófono (secc
 $('#fuga').onclick=()=>{if(!worklet){status('Primero inicia el micrófono.');return;}if(loopTimer===null)tocarMusica();$('#veredicto').className='';leakTest={inicio:performance.now(),muestras:[]};};
 
 // Versión visible, para confirmar que el teléfono no muestra una copia vieja.
-const VERSION='v6 (2026-11-08)';
+const VERSION='v7 (2026-11-08)';
 // Revisión del navegador al cargar.
 const ua=navigator.userAgent;
 diag.compatibilidad={
