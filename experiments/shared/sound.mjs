@@ -13,8 +13,9 @@ function noise(ctx,out,start,duration,gain,cutoff){
   for(let i=0;i<d.length;i++){randomSeed=(Math.imul(1664525,randomSeed)+1013904223)>>>0;d[i]=(randomSeed/4294967296*2-1)*Math.exp(-i/(d.length*.18));}
   const source=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),amp=ctx.createGain();source.buffer=b;filter.type='highpass';filter.frequency.value=cutoff;amp.gain.value=gain;source.connect(filter).connect(amp).connect(out);source.start(start);
 }
-export function scheduleProgression(ctx,key='Do',start=ctx.currentTime+.1){
-  const master=ctx.createGain();master.gain.value=.65;master.connect(ctx.destination);
+// destination opcional: permite pasar la música por un control de volumen propio (h-celular).
+export function scheduleProgression(ctx,key='Do',start=ctx.currentTime+.1,destination=ctx.destination){
+  const master=ctx.createGain();master.gain.value=.65;master.connect(destination);
   const transpose=key==='Sol'?7:0,chords=[[48,52,55],[43,47,50],[45,48,52],[41,45,48]];
   const cpuStart=performance.now();
   chords.forEach((chord,j)=>{for(const note of chord){for(const detune of [-7,7])tone(ctx,master,midiHz(note+transpose),start+j*2,2,'sawtooth',.018,detune,1400);}

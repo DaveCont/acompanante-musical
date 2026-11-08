@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>H · Prueba en celular</title>
+<link rel="stylesheet" href="../shared/style.css">
+<style>
+  body{padding:16px}
+  #nivel{font-size:5rem;font-weight:800;text-align:center;padding:10px;border-radius:14px;background:#1b3046;margin:10px 0;transition:background .3s}
+  #nivel small{display:block;font-size:1rem;font-weight:400;color:#cfe}
+  .n1{background:#1b3046!important}.n2{background:#1f5a4a!important}.n3{background:#7a6a1f!important}.n4{background:#8a2f2f!important}
+  button{width:100%;font-size:1.15rem}
+  .fila{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .fila button{margin:0}
+  input[type=range]{width:100%;padding:0}
+  #veredicto{font-size:1.1rem;line-height:1.5;white-space:pre-wrap}
+  .ok{color:#92e8bb}.mal{color:#ff9d8a}
+</style>
+<body>
+  <nav><a href="../index.html">← Experimentos</a></nav>
+  <h1>H · Celular: micrófono + bocina del mismo teléfono</h1>
+  <p>Prueba el peor caso: la música sale por la bocina del teléfono y el micrófono del mismo teléfono la escucha.
+     Sube el volumen del teléfono. En iPhone: quita el modo silencio y el "Aislamiento de voz" (Centro de Control → Modo de micrófono → Estándar).</p>
+
+  <section class="panel">
+    <h2>1 · Opciones del micrófono</h2>
+    <label><input id="aec" type="checkbox" checked> Cancelación de eco (recomendado en celular)</label><br>
+    <label><input id="ns" type="checkbox"> Supresión de ruido</label><br>
+    <label><input id="agc" type="checkbox"> Control automático de volumen (no recomendado)</label>
+    <div class="fila"><button id="iniciar">▶ Iniciar micrófono</button><button id="detener">■ Detener todo</button></div>
+    <p id="status" class="status">Sin iniciar.</p>
+  </section>
+
+  <div id="nivel">–<small>nivel detectado</small></div>
+  <canvas id="barra" width="1000" height="120" aria-label="Energía de la voz y umbrales"></canvas>
+  <div class="grid" id="metrics"></div>
+
+  <section class="panel">
+    <h2>2 · Calibrar tu voz (sin música)</h2>
+    <p>Pulsa y habla 5 s normal, luego 5 s fuerte, como en el clímax del sermón.</p>
+    <button id="calibrar">🎙 Calibrar 10 s</button>
+  </section>
+
+  <section class="panel">
+    <h2>3 · Música por la bocina</h2>
+    <label>Tonalidad <select id="tono"><option>Do</option><option>Sol</option></select></label>
+    <label style="display:block">Volumen de la música <input id="volumen" type="range" min="0" max="1" step="0.05" value="0.6"></label>
+    <label><input id="reacciona" type="checkbox" checked> La música sube y baja con el nivel (como en la app real)</label>
+    <div class="fila"><button id="musica">♪ Tocar música</button><button id="parar">Parar música</button></div>
+  </section>
+
+  <section class="panel">
+    <h2>4 · Prueba de fuga (¿la app se escucha a sí misma?)</h2>
+    <p>Con la música sonando, pulsa y <b>quédate callado 10 s</b>. Si la música sola dispara niveles, la app se confundiría.</p>
+    <button id="fuga">🤫 Prueba de silencio 10 s</button>
+    <p id="veredicto"></p>
+  </section>
+
+  <section class="panel">
+    <h2>5 · Prueba libre</h2>
+    <p>Con la música sonando, predica: habla suave, luego sube. Mira si el nivel te sigue a ti y no a la música.
+       Prueba también con audífonos con cable para comparar.</p>
+  </section>
+
+  <details><summary>Datos técnicos</summary><pre id="log"></pre></details>
+  <script type="module" src="./pagina.mjs"></script>
+</body>
+</html>
