@@ -61,7 +61,7 @@ async function iniciar(){
   worklet.onprocessorerror=e=>fallo('analizador',e.message||'error interno del procesador');
   worklet.port.onmessage=({data})=>{
     diag.mensajes_procesador++;
-    if(data.calibration){try{config=calibrate(data.calibration,winnerId,ctx.sampleRate);worklet.port.postMessage({method:winnerId,config});status('✔ Calibración aplicada con tu voz.');log({calibracion:config});}catch(e){fallo('calibración',e);}return;}
+    if(data.calibration){try{config=calibrate(data.calibration,winnerId,ctx.sampleRate);worklet.port.postMessage({method:winnerId,config});{const dif=config.fuerte_db-config.normal_db,eco=$('#aec').checked?'eco ON':'eco OFF';diag.calibraciones=(diag.calibraciones||[]).concat({eco,normal_db:+config.normal_db.toFixed(1),fuerte_db:+config.fuerte_db.toFixed(1),diferencia_db:+dif.toFixed(1)});status(`✔ Calibrado (${eco}). Diferencia normal→fuerte: ${dif.toFixed(1)} dB `+(dif>=8?'✔ buena':'✖ muy poca (ideal 8 dB o más)'));}log({calibracion:config});}catch(e){fallo('calibración',e);}return;}
     mostrar(data);
   };
   worklet.port.postMessage({method:winnerId,config});
@@ -146,7 +146,7 @@ $('#reacciona').onchange=()=>volumenMusica();
 $('#fuga').onclick=()=>{if(!worklet){status('Primero inicia el micrófono.');return;}if(loopTimer===null)tocarMusica();$('#veredicto').className='';leakTest={inicio:performance.now(),muestras:[]};};
 
 // Versión visible, para confirmar que el teléfono no muestra una copia vieja.
-const VERSION='v3 (2026-11-08)';
+const VERSION='v4 (2026-11-08)';
 // Revisión del navegador al cargar.
 const ua=navigator.userAgent;
 diag.compatibilidad={
