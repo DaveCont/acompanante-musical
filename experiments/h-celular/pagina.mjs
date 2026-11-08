@@ -145,10 +145,43 @@ $('#volumen').oninput=()=>volumenMusica();
 $('#reacciona').onchange=()=>volumenMusica();
 $('#fuga').onclick=()=>{if(!worklet){status('Primero inicia el micrófono.');return;}if(loopTimer===null)tocarMusica();$('#veredicto').className='';leakTest={inicio:performance.now(),muestras:[]};};
 
-// Copiar diagnóstico para pegarlo en el chat.
+// Versión visible, para confirmar que el teléfono no muestra una copia vieja.
+const VERSION='v3 (2026-11-08)';
+// Revisión del navegador al cargar.
+const ua=navigator.userAgent;
+diag.compatibilidad={
+  version:VERSION,
+  conexion_segura:window.isSecureContext,
+  audio:!!(window.AudioContext||window.webkitAudioContext),
+  microfono:!!navigator.mediaDevices?.getUserMedia,
+  audioworklet:typeof AudioWorkletNode!=='undefined',
+  navegador_interno:/FBAN|FBAV|FB_IAB|Instagram|WhatsApp|Line\/|Messenger|GSA\//i.test(ua)
+};
+{
+  const c=diag.compatibilidad,ok=v=>v?'✔':'✖',avisos=[];
+  if(c.navegador_interno)avisos.push('⚠ Estás en el navegador interno de una app (WhatsApp/Facebook/etc.). Ábrela en Safari o Chrome: menú ⋯ → "Abrir en el navegador".');
+  if(!c.conexion_segura)avisos.push('⚠ La página no es segura (https): el micrófono no funcionará.');
+  if(!c.audio||!c.audioworklet)avisos.push('⚠ Este navegador no tiene el audio necesario. Actualiza Safari/Chrome.');
+  if(!c.microfono)avisos.push('⚠ Este navegador no permite usar el micrófono aquí.');
+  $('#compat').textContent=`Página ${VERSION} cargada ✔ · audio ${ok(c.audio&&c.audioworklet)} · micrófono ${ok(c.microfono)} · https ${ok(c.conexion_segura)}`+(avisos.length?'\n'+avisos.join('\n'):'');
+  $('#compat').className=avisos.length?'mal':'ok';
+}
+
+// Diagnóstico: siempre visible en un cuadro de texto (no depende del portapapeles).
+function textoDiag(){
+  const {ajustes,...resto}=diag;
+  return JSON.stringify({...resto,microfono_ajustes:ajustes,ultimo_dato:last,umbrales:config?.thresholds},null,1);
+}
 $('#copiar').onclick=async()=>{
-  const texto=JSON.stringify({...diag,ultimo_dato:last,config},null,1);
-  try{await navigator.clipboard.writeText(texto);$('#copiar').textContent='✔ Copiado: pégalo en el chat';}
-  catch{$('#log').textContent=texto;document.querySelector('details').open=true;$('#copiar').textContent='Selecciona el texto de abajo y cópialo';}
+  const caja=$('#diagtexto');caja.hidden=false;caja.value=textoDiag();caja.focus();caja.select();caja.setSelectionRange(0,caja.value.length);
+  let copiado=false;
+  try{await navigator.clipboard.writeText(caja.value);copiado=true;}catch{}
+  if(!copiado){try{copiado=document.execCommand('copy');}catch{}}
+  $('#copiar').textContent=copiado?'✔ Copiado. Pégalo en el chat (o mándalo con el botón Compartir)':'Mantén presionado el texto de abajo → Seleccionar todo → Copiar';
+};
+$('#compartir').onclick=async()=>{
+  const texto=textoDiag();
+  if(navigator.share){try{await navigator.share({title:'Diagnóstico acompañante',text:texto});}catch{}}
+  else{$('#diagtexto').hidden=false;$('#diagtexto').value=texto;$('#compartir').textContent='Este navegador no puede compartir: copia el texto de abajo';}
 };
 pintarDiag();

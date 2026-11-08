@@ -22,6 +22,7 @@
   <p>Prueba el peor caso: la música sale por la bocina del teléfono y el micrófono del mismo teléfono la escucha.
      Sube el volumen del teléfono. En iPhone: quita el modo silencio y el "Aislamiento de voz" (Centro de Control → Modo de micrófono → Estándar).</p>
 
+  <p id="compat" class="mal" style="white-space:pre-wrap">⚠ El código de la página no cargó. Recarga la página o ábrela en Safari/Chrome (no dentro de WhatsApp/Facebook).</p>
   <section class="panel">
     <h2>1 · Opciones del micrófono</h2>
     <label><input id="aec" type="checkbox" checked> Cancelación de eco (recomendado en celular)</label><br>
@@ -34,7 +35,8 @@
     <div style="background:#08101b;border-radius:8px;height:28px;overflow:hidden"><div id="crudo" style="height:100%;width:0;background:#7dd6f5;transition:width .05s"></div></div>
     <div class="grid" id="diag" style="margin-top:10px"></div>
     <pre id="errores" class="mal"></pre>
-    <button id="copiar">📋 Copiar diagnóstico</button>
+    <div class="fila"><button id="copiar">📋 Copiar diagnóstico</button><button id="compartir">📤 Compartir</button></div>
+    <textarea id="diagtexto" hidden readonly style="width:100%;height:180px;font-size:.8rem;background:#08101b;color:#cfe"></textarea>
   </section>
 
   <div id="nivel">–<small>nivel detectado</small></div>
@@ -69,6 +71,6 @@
   </section>
 
   <details><summary>Datos técnicos</summary><pre id="log"></pre></details>
-  <script type="module" src="./pagina.mjs"></script>
+  <script type="module" src="./pagina.mjs?v=3"></script>
 </body>
 </html>
