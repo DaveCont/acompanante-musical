@@ -1,0 +1,6 @@
+import {audio,bench,report,kb,round} from '../shared/node.mjs';
+import {rms,db} from '../shared/dsp.mjs';
+const {samples:x,sampleRate}=audio('sermon-simulado.wav');
+let peak=0,clipped=0;for(const v of x){peak=Math.max(peak,Math.abs(v));if(Math.abs(v)>=.9999)clipped++;}
+const result={sampleRate,canales:1,bits:16,duracion_s:x.length/sampleRate,rms_dbfs:round(db(rms(x))),pico_dbfs:round(db(peak)),muestras_recortadas:clipped,cpu_128:bench(()=>rms(x.subarray(48000,48128)),2000),peso_dsp_kb:kb('shared/dsp.mjs'),constraints:'pendiente: solo micrófono real permite comparar procesamiento ON/OFF',latencias_hardware:'pendiente de navegador/dispositivo; no inferidas del WAV',jitter:'se mide en navegador con medir-navegador.mjs'};
+report('a-captura',result,`WAV: ${sampleRate} Hz mono PCM16, ${result.duracion_s} s; pico ${result.pico_dbfs} dBFS; ${clipped} muestras recortadas. CPU RMS: ${result.cpu_128.media_ms} ms/128; módulo DSP ${result.peso_dsp_kb} KiB.\n\nConstraints ON/OFF: pendientes de micrófono físico. AudioWorklet frente a AnalyserNode, baseLatency/outputLatency y jitter se miden con el botón de captura y el registro de navegador; no se atribuye efecto de constraints a un archivo. Reacción acústica y error de captura: pendientes de bucle físico.`);

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B · Energía y calibración</title>
+<link rel="stylesheet" href="../shared/style.css">
+<body data-stage="b">
+  <nav><a href="../index.html">← Experimentos</a> <a href="./RESULTADOS.md">Resultados Node</a> <a href="./resultados.json">JSON</a></nav>
+  <h1>B · Energía y calibración</h1>
+  <section class="panel">
+    <label>Método <select id="method"></select></label>
+    <p id="parameters"></p>
+    <label><input id="constraints" type="checkbox"> AEC + supresión de ruido + AGC</label>
+    <button id="mic">Micrófono real</button><button id="stop">Detener</button><br>
+    <select id="fixture" aria-label="WAV de prueba"></select>
+    <button id="load">Cargar WAV de test-audio</button>
+    <label>Otro WAV <input id="file" type="file" accept=".wav,audio/wav"></label>
+    <label><input id="listen" type="checkbox"> Escuchar WAV</label>
+    <p id="status" role="status">Sin entrada activa.</p>
+    <canvas id="wave" width="1000" height="160" aria-label="Nivel de energía y umbrales"></canvas>
+  </section>
+  <section class="grid" id="metrics"></section>
+  <section class="panel">
+    <h2>Calibrar 10 s</h2>
+    <p>5 s de voz normal + 5 s de voz fuerte. La entrada activa se captura como PCM continuo. Cada método conserva sus propios umbrales. Al abrir se utiliza calibracion.wav.</p>
+    <button id="cal">Calibrar entrada activa</button><button id="calfixture">Calibrar WAV de 10 s</button>
+    <button id="energy">Medir WAV completo</button><pre id="energyresult"></pre>
+  </section>
+  <section class="panel"><h2>Resultados Node</h2><pre id="offline">Cargando…</pre></section>
+  <details><summary>Registro del dispositivo</summary><pre id="log"></pre></details>
+  <script type="module" src="./pagina.mjs"></script>
+</body>
+</html>

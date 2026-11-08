@@ -1,0 +1,1739 @@
+{
+  "entorno": {
+    "fecha": "2026-11-08T15:12:39.080Z",
+    "node": "v24.14.1",
+    "cpu": "Intel(R) Core(TM) i7-6820HK CPU @ 2.70GHz",
+    "plataforma": "win32"
+  },
+  "ganador": "hybrid",
+  "comparacion": [
+    {
+      "id": "rms10",
+      "nombre": "RMS 10/200",
+      "parametros": {
+        "id": "rms10",
+        "nombre": "RMS 10/200",
+        "attack": 0.01,
+        "release": 0.2,
+        "legacy": true
+      },
+      "calibracion": {
+        "normal_db": -12.315057745566227,
+        "fuerte_db": -5.067746717071769,
+        "thresholds": [
+          -17.75054101693707,
+          -8.691402231318998,
+          -1.0817256513998164
+        ],
+        "hysteresis_db": 1.5,
+        "vad_db": -32.97467974395824
+      },
+      "acierto_pct": 61.247,
+      "acierto_estable_pct": 61.896,
+      "reaccion_mediana_ms": 213.333,
+      "reaccion_media_ms": 387.2,
+      "reaccion_subida_mediana_ms": 210.667,
+      "reaccion_subida_max_ms": 213.333,
+      "subidas_detectadas": 2,
+      "subidas_esperadas": 4,
+      "parpadeos_fuera_transicion": 74,
+      "segmentos_sin_acierto_sostenido": [
+        82,
+        109
+      ],
+      "reacciones": [
+        {
+          "inicio_s": 0,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 23,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 25,
+          "nivel": 2,
+          "subida": true,
+          "reaccion_ms": 210.667
+        },
+        {
+          "inicio_s": 48,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 189.333
+        },
+        {
+          "inicio_s": 51,
+          "nivel": 3,
+          "subida": true,
+          "reaccion_ms": 213.333
+        },
+        {
+          "inicio_s": 74,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 546.667
+        },
+        {
+          "inicio_s": 82,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        },
+        {
+          "inicio_s": 105,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 776
+        },
+        {
+          "inicio_s": 109,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        }
+      ],
+      "con_musica": {
+        "acierto_pct": 48.28,
+        "acierto_estable_pct": 49.284,
+        "reaccion_mediana_ms": 226.667,
+        "reaccion_media_ms": 553.067,
+        "reaccion_subida_mediana_ms": 208,
+        "reaccion_subida_max_ms": 226.667,
+        "subidas_detectadas": 2,
+        "subidas_esperadas": 4,
+        "parpadeos_fuera_transicion": 115,
+        "segmentos_sin_acierto_sostenido": [
+          82,
+          109
+        ],
+        "reacciones": [
+          {
+            "inicio_s": 0,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 23,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 512
+          },
+          {
+            "inicio_s": 25,
+            "nivel": 2,
+            "subida": true,
+            "reaccion_ms": 208
+          },
+          {
+            "inicio_s": 48,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 106.667
+          },
+          {
+            "inicio_s": 51,
+            "nivel": 3,
+            "subida": true,
+            "reaccion_ms": 226.667
+          },
+          {
+            "inicio_s": 74,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 1410.667
+          },
+          {
+            "inicio_s": 82,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          },
+          {
+            "inicio_s": 105,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 813.333
+          },
+          {
+            "inicio_s": 109,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          }
+        ]
+      },
+      "escalon": {
+        "reaccion_1db_ms": 18.667,
+        "energia_rapida_1db_ms": 50.667
+      },
+      "cpu_128": {
+        "media_ms": 0.006625,
+        "p95_ms": 0.0092,
+        "iteraciones": 45000
+      }
+    },
+    {
+      "id": "rms20",
+      "nombre": "RMS 20/300",
+      "parametros": {
+        "id": "rms20",
+        "nombre": "RMS 20/300",
+        "attack": 0.02,
+        "release": 0.3,
+        "legacy": true
+      },
+      "calibracion": {
+        "normal_db": -12.409282329497495,
+        "fuerte_db": -5.168491295745719,
+        "thresholds": [
+          -17.839875604811326,
+          -8.788886812621607,
+          -1.1860562271822417
+        ],
+        "hysteresis_db": 1.5,
+        "vad_db": -32.97467974395824
+      },
+      "acierto_pct": 62.191,
+      "acierto_estable_pct": 63.246,
+      "reaccion_mediana_ms": 285.333,
+      "reaccion_media_ms": 546.133,
+      "reaccion_subida_mediana_ms": 213.333,
+      "reaccion_subida_max_ms": 221.333,
+      "subidas_detectadas": 2,
+      "subidas_esperadas": 4,
+      "parpadeos_fuera_transicion": 60,
+      "segmentos_sin_acierto_sostenido": [
+        82,
+        109
+      ],
+      "reacciones": [
+        {
+          "inicio_s": 0,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 23,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 25,
+          "nivel": 2,
+          "subida": true,
+          "reaccion_ms": 213.333
+        },
+        {
+          "inicio_s": 48,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 285.333
+        },
+        {
+          "inicio_s": 51,
+          "nivel": 3,
+          "subida": true,
+          "reaccion_ms": 221.333
+        },
+        {
+          "inicio_s": 74,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 824
+        },
+        {
+          "inicio_s": 82,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        },
+        {
+          "inicio_s": 105,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 1186.667
+        },
+        {
+          "inicio_s": 109,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        }
+      ],
+      "con_musica": {
+        "acierto_pct": 50.053,
+        "acierto_estable_pct": 51.104,
+        "reaccion_mediana_ms": 234.667,
+        "reaccion_media_ms": 949.333,
+        "reaccion_subida_mediana_ms": 210.667,
+        "reaccion_subida_max_ms": 234.667,
+        "subidas_detectadas": 2,
+        "subidas_esperadas": 4,
+        "parpadeos_fuera_transicion": 90,
+        "segmentos_sin_acierto_sostenido": [
+          82,
+          109
+        ],
+        "reacciones": [
+          {
+            "inicio_s": 0,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 23,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 546.667
+          },
+          {
+            "inicio_s": 25,
+            "nivel": 2,
+            "subida": true,
+            "reaccion_ms": 210.667
+          },
+          {
+            "inicio_s": 48,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 189.333
+          },
+          {
+            "inicio_s": 51,
+            "nivel": 3,
+            "subida": true,
+            "reaccion_ms": 234.667
+          },
+          {
+            "inicio_s": 74,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 1557.333
+          },
+          {
+            "inicio_s": 82,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          },
+          {
+            "inicio_s": 105,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2554.667
+          },
+          {
+            "inicio_s": 109,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          }
+        ]
+      },
+      "escalon": {
+        "reaccion_1db_ms": 37.333,
+        "energia_rapida_1db_ms": 50.667
+      },
+      "cpu_128": {
+        "media_ms": 0.006846,
+        "p95_ms": 0.0094,
+        "iteraciones": 45000
+      }
+    },
+    {
+      "id": "rms30",
+      "nombre": "RMS 30/400",
+      "parametros": {
+        "id": "rms30",
+        "nombre": "RMS 30/400",
+        "attack": 0.03,
+        "release": 0.4,
+        "legacy": true
+      },
+      "calibracion": {
+        "normal_db": -12.507717788091435,
+        "fuerte_db": -5.253886147452329,
+        "thresholds": [
+          -17.948091518570763,
+          -8.880801967771882,
+          -1.2642787451008202
+        ],
+        "hysteresis_db": 1.5,
+        "vad_db": -32.97467974395824
+      },
+      "acierto_pct": 62.704,
+      "acierto_estable_pct": 63.905,
+      "reaccion_mediana_ms": 400,
+      "reaccion_media_ms": 710.933,
+      "reaccion_subida_mediana_ms": 221.333,
+      "reaccion_subida_max_ms": 226.667,
+      "subidas_detectadas": 2,
+      "subidas_esperadas": 4,
+      "parpadeos_fuera_transicion": 34,
+      "segmentos_sin_acierto_sostenido": [
+        82,
+        109
+      ],
+      "reacciones": [
+        {
+          "inicio_s": 0,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 23,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 25,
+          "nivel": 2,
+          "subida": true,
+          "reaccion_ms": 221.333
+        },
+        {
+          "inicio_s": 48,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 400
+        },
+        {
+          "inicio_s": 51,
+          "nivel": 3,
+          "subida": true,
+          "reaccion_ms": 226.667
+        },
+        {
+          "inicio_s": 74,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 1109.333
+        },
+        {
+          "inicio_s": 82,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        },
+        {
+          "inicio_s": 105,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 1597.333
+        },
+        {
+          "inicio_s": 109,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        }
+      ],
+      "con_musica": {
+        "acierto_pct": 50.898,
+        "acierto_estable_pct": 52.47,
+        "reaccion_mediana_ms": 661.333,
+        "reaccion_media_ms": 1056.533,
+        "reaccion_subida_mediana_ms": 213.333,
+        "reaccion_subida_max_ms": 240,
+        "subidas_detectadas": 2,
+        "subidas_esperadas": 4,
+        "parpadeos_fuera_transicion": 73,
+        "segmentos_sin_acierto_sostenido": [
+          82,
+          109
+        ],
+        "reacciones": [
+          {
+            "inicio_s": 0,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 23,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 586.667
+          },
+          {
+            "inicio_s": 25,
+            "nivel": 2,
+            "subida": true,
+            "reaccion_ms": 213.333
+          },
+          {
+            "inicio_s": 48,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 661.333
+          },
+          {
+            "inicio_s": 51,
+            "nivel": 3,
+            "subida": true,
+            "reaccion_ms": 240
+          },
+          {
+            "inicio_s": 74,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 1586.667
+          },
+          {
+            "inicio_s": 82,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          },
+          {
+            "inicio_s": 105,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2581.333
+          },
+          {
+            "inicio_s": 109,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          }
+        ]
+      },
+      "escalon": {
+        "reaccion_1db_ms": 53.333,
+        "energia_rapida_1db_ms": 50.667
+      },
+      "cpu_128": {
+        "media_ms": 0.008961,
+        "p95_ms": 0.0111,
+        "iteraciones": 45000
+      }
+    },
+    {
+      "id": "lufs",
+      "nombre": "LUFS K 400ms",
+      "parametros": {
+        "id": "lufs",
+        "nombre": "LUFS K 400ms",
+        "legacy": true
+      },
+      "calibracion": {
+        "normal_db": -16.802056175466276,
+        "fuerte_db": -8.662966704646529,
+        "thresholds": [
+          -22.906373278581086,
+          -12.732511440056403,
+          -4.186467495695667
+        ],
+        "hysteresis_db": 1.5,
+        "vad_db": -32.97467974395824
+      },
+      "acierto_pct": 79.278,
+      "acierto_estable_pct": 80.251,
+      "reaccion_mediana_ms": 384,
+      "reaccion_media_ms": 372.571,
+      "reaccion_subida_mediana_ms": 378.667,
+      "reaccion_subida_max_ms": 445.333,
+      "subidas_detectadas": 4,
+      "subidas_esperadas": 4,
+      "parpadeos_fuera_transicion": 128,
+      "segmentos_sin_acierto_sostenido": [],
+      "reacciones": [
+        {
+          "inicio_s": 0,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 23,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 25,
+          "nivel": 2,
+          "subida": true,
+          "reaccion_ms": 248
+        },
+        {
+          "inicio_s": 48,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 330.667
+        },
+        {
+          "inicio_s": 51,
+          "nivel": 3,
+          "subida": true,
+          "reaccion_ms": 378.667
+        },
+        {
+          "inicio_s": 74,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 386.667
+        },
+        {
+          "inicio_s": 82,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": 434.667
+        },
+        {
+          "inicio_s": 105,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 384
+        },
+        {
+          "inicio_s": 109,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": 445.333
+        }
+      ],
+      "con_musica": {
+        "acierto_pct": 46.678,
+        "acierto_estable_pct": 47.487,
+        "reaccion_mediana_ms": 410.667,
+        "reaccion_media_ms": 2601.524,
+        "reaccion_subida_mediana_ms": 410.667,
+        "reaccion_subida_max_ms": 10466.667,
+        "subidas_detectadas": 4,
+        "subidas_esperadas": 4,
+        "parpadeos_fuera_transicion": 111,
+        "segmentos_sin_acierto_sostenido": [],
+        "reacciones": [
+          {
+            "inicio_s": 0,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 23,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 658.667
+          },
+          {
+            "inicio_s": 25,
+            "nivel": 2,
+            "subida": true,
+            "reaccion_ms": 240
+          },
+          {
+            "inicio_s": 48,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 338.667
+          },
+          {
+            "inicio_s": 51,
+            "nivel": 3,
+            "subida": true,
+            "reaccion_ms": 410.667
+          },
+          {
+            "inicio_s": 74,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 1672
+          },
+          {
+            "inicio_s": 82,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": 4693.333
+          },
+          {
+            "inicio_s": 105,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 389.333
+          },
+          {
+            "inicio_s": 109,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": 10466.667
+          }
+        ]
+      },
+      "escalon": {
+        "reaccion_1db_ms": 317.333,
+        "energia_rapida_1db_ms": 50.667
+      },
+      "cpu_128": {
+        "media_ms": 0.019084,
+        "p95_ms": 0.0309,
+        "iteraciones": 45000
+      }
+    },
+    {
+      "id": "hp30",
+      "nombre": "HP100 RMS 30/800",
+      "parametros": {
+        "id": "hp30",
+        "nombre": "HP100 RMS 30/800",
+        "hp": true,
+        "attack": 0.03,
+        "release": 0.8
+      },
+      "calibracion": {
+        "normal_db": -11.968372809263045,
+        "fuerte_db": -4.778465688043385,
+        "thresholds": [
+          -17.360803150177787,
+          -8.373419248653214,
+          -0.8240167713725715
+        ],
+        "hysteresis_db": 1.5,
+        "vad_db": -33.345120080999166
+      },
+      "acierto_pct": 63.844,
+      "acierto_estable_pct": 65.485,
+      "reaccion_mediana_ms": 864,
+      "reaccion_media_ms": 1342.4,
+      "reaccion_subida_mediana_ms": 221.333,
+      "reaccion_subida_max_ms": 237.333,
+      "subidas_detectadas": 2,
+      "subidas_esperadas": 4,
+      "parpadeos_fuera_transicion": 22,
+      "segmentos_sin_acierto_sostenido": [
+        82,
+        109
+      ],
+      "reacciones": [
+        {
+          "inicio_s": 0,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 23,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 25,
+          "nivel": 2,
+          "subida": true,
+          "reaccion_ms": 221.333
+        },
+        {
+          "inicio_s": 48,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 864
+        },
+        {
+          "inicio_s": 51,
+          "nivel": 3,
+          "subida": true,
+          "reaccion_ms": 237.333
+        },
+        {
+          "inicio_s": 74,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2224
+        },
+        {
+          "inicio_s": 82,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        },
+        {
+          "inicio_s": 105,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 3165.333
+        },
+        {
+          "inicio_s": 109,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        }
+      ],
+      "con_musica": {
+        "acierto_pct": 61.544,
+        "acierto_estable_pct": 62.981,
+        "reaccion_mediana_ms": 722.667,
+        "reaccion_media_ms": 1254.4,
+        "reaccion_subida_mediana_ms": 221.333,
+        "reaccion_subida_max_ms": 253.333,
+        "subidas_detectadas": 2,
+        "subidas_esperadas": 4,
+        "parpadeos_fuera_transicion": 19,
+        "segmentos_sin_acierto_sostenido": [
+          82,
+          109
+        ],
+        "reacciones": [
+          {
+            "inicio_s": 0,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 23,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 25,
+            "nivel": 2,
+            "subida": true,
+            "reaccion_ms": 221.333
+          },
+          {
+            "inicio_s": 48,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 722.667
+          },
+          {
+            "inicio_s": 51,
+            "nivel": 3,
+            "subida": true,
+            "reaccion_ms": 253.333
+          },
+          {
+            "inicio_s": 74,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2072
+          },
+          {
+            "inicio_s": 82,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          },
+          {
+            "inicio_s": 105,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 3002.667
+          },
+          {
+            "inicio_s": 109,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          }
+        ]
+      },
+      "escalon": {
+        "reaccion_1db_ms": 53.333,
+        "energia_rapida_1db_ms": 50.667
+      },
+      "cpu_128": {
+        "media_ms": 0.017754,
+        "p95_ms": 0.0188,
+        "iteraciones": 45000
+      }
+    },
+    {
+      "id": "hp50",
+      "nombre": "HP100 RMS 50/1500",
+      "parametros": {
+        "id": "hp50",
+        "nombre": "HP100 RMS 50/1500",
+        "hp": true,
+        "attack": 0.05,
+        "release": 1.5
+      },
+      "calibracion": {
+        "normal_db": -11.881039100630229,
+        "fuerte_db": -4.736950053301633,
+        "thresholds": [
+          -17.239105886126676,
+          -8.308994576965931,
+          -0.8077010772709046
+        ],
+        "hysteresis_db": 1.5,
+        "vad_db": -33.345120080999166
+      },
+      "acierto_pct": 62.778,
+      "acierto_estable_pct": 64.369,
+      "reaccion_mediana_ms": 248,
+      "reaccion_media_ms": 1638,
+      "reaccion_subida_mediana_ms": 232,
+      "reaccion_subida_max_ms": 248,
+      "subidas_detectadas": 2,
+      "subidas_esperadas": 4,
+      "parpadeos_fuera_transicion": 6,
+      "segmentos_sin_acierto_sostenido": [
+        82,
+        105,
+        109
+      ],
+      "reacciones": [
+        {
+          "inicio_s": 0,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 23,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 25,
+          "nivel": 2,
+          "subida": true,
+          "reaccion_ms": 232
+        },
+        {
+          "inicio_s": 48,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 1813.333
+        },
+        {
+          "inicio_s": 51,
+          "nivel": 3,
+          "subida": true,
+          "reaccion_ms": 248
+        },
+        {
+          "inicio_s": 74,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 4258.667
+        },
+        {
+          "inicio_s": 82,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        },
+        {
+          "inicio_s": 105,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": null
+        },
+        {
+          "inicio_s": 109,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        }
+      ],
+      "con_musica": {
+        "acierto_pct": 61.327,
+        "acierto_estable_pct": 62.953,
+        "reaccion_mediana_ms": 394.667,
+        "reaccion_media_ms": 1516.667,
+        "reaccion_subida_mediana_ms": 229.333,
+        "reaccion_subida_max_ms": 394.667,
+        "subidas_detectadas": 2,
+        "subidas_esperadas": 4,
+        "parpadeos_fuera_transicion": 13,
+        "segmentos_sin_acierto_sostenido": [
+          82,
+          105,
+          109
+        ],
+        "reacciones": [
+          {
+            "inicio_s": 0,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 23,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 25,
+            "nivel": 2,
+            "subida": true,
+            "reaccion_ms": 229.333
+          },
+          {
+            "inicio_s": 48,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 1525.333
+          },
+          {
+            "inicio_s": 51,
+            "nivel": 3,
+            "subida": true,
+            "reaccion_ms": 394.667
+          },
+          {
+            "inicio_s": 74,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 3917.333
+          },
+          {
+            "inicio_s": 82,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          },
+          {
+            "inicio_s": 105,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": null
+          },
+          {
+            "inicio_s": 109,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          }
+        ]
+      },
+      "escalon": {
+        "reaccion_1db_ms": 90.667,
+        "energia_rapida_1db_ms": 50.667
+      },
+      "cpu_128": {
+        "media_ms": 0.013281,
+        "p95_ms": 0.0182,
+        "iteraciones": 45000
+      }
+    },
+    {
+      "id": "hp80",
+      "nombre": "HP100 RMS 80/2500",
+      "parametros": {
+        "id": "hp80",
+        "nombre": "HP100 RMS 80/2500",
+        "hp": true,
+        "attack": 0.08,
+        "release": 2.5
+      },
+      "calibracion": {
+        "normal_db": -11.958013703645081,
+        "fuerte_db": -4.792618129299476,
+        "thresholds": [
+          -17.332060384404286,
+          -8.375315916472278,
+          -0.8516505634093932
+        ],
+        "hysteresis_db": 1.5,
+        "vad_db": -33.345120080999166
+      },
+      "acierto_pct": 59.344,
+      "acierto_estable_pct": 60.742,
+      "reaccion_mediana_ms": 269.333,
+      "reaccion_media_ms": 2598.222,
+      "reaccion_subida_mediana_ms": 240,
+      "reaccion_subida_max_ms": 269.333,
+      "subidas_detectadas": 2,
+      "subidas_esperadas": 4,
+      "parpadeos_fuera_transicion": 2,
+      "segmentos_sin_acierto_sostenido": [
+        48,
+        82,
+        105,
+        109
+      ],
+      "reacciones": [
+        {
+          "inicio_s": 0,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 23,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 25,
+          "nivel": 2,
+          "subida": true,
+          "reaccion_ms": 240
+        },
+        {
+          "inicio_s": 48,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": null
+        },
+        {
+          "inicio_s": 51,
+          "nivel": 3,
+          "subida": true,
+          "reaccion_ms": 269.333
+        },
+        {
+          "inicio_s": 74,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 7285.333
+        },
+        {
+          "inicio_s": 82,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        },
+        {
+          "inicio_s": 105,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": null
+        },
+        {
+          "inicio_s": 109,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        }
+      ],
+      "con_musica": {
+        "acierto_pct": 58.96,
+        "acierto_estable_pct": 60.511,
+        "reaccion_mediana_ms": 464,
+        "reaccion_media_ms": 2570.667,
+        "reaccion_subida_mediana_ms": 245.333,
+        "reaccion_subida_max_ms": 464,
+        "subidas_detectadas": 2,
+        "subidas_esperadas": 4,
+        "parpadeos_fuera_transicion": 5,
+        "segmentos_sin_acierto_sostenido": [
+          48,
+          82,
+          105,
+          109
+        ],
+        "reacciones": [
+          {
+            "inicio_s": 0,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 23,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 25,
+            "nivel": 2,
+            "subida": true,
+            "reaccion_ms": 245.333
+          },
+          {
+            "inicio_s": 48,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": null
+          },
+          {
+            "inicio_s": 51,
+            "nivel": 3,
+            "subida": true,
+            "reaccion_ms": 464
+          },
+          {
+            "inicio_s": 74,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 7002.667
+          },
+          {
+            "inicio_s": 82,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          },
+          {
+            "inicio_s": 105,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": null
+          },
+          {
+            "inicio_s": 109,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          }
+        ]
+      },
+      "escalon": {
+        "reaccion_1db_ms": 141.333,
+        "energia_rapida_1db_ms": 50.667
+      },
+      "cpu_128": {
+        "media_ms": 0.012146,
+        "p95_ms": 0.0156,
+        "iteraciones": 45000
+      }
+    },
+    {
+      "id": "vad",
+      "nombre": "VAD hold 1500",
+      "parametros": {
+        "id": "vad",
+        "nombre": "VAD hold 1500",
+        "attack": 0.03,
+        "release": 0.3,
+        "hold": 1.5
+      },
+      "calibracion": {
+        "normal_db": -12.895110078582467,
+        "fuerte_db": -5.531290102236678,
+        "thresholds": [
+          -18.417975060841812,
+          -9.213200090409572,
+          -1.4811891152464938
+        ],
+        "hysteresis_db": 1.5,
+        "vad_db": -32.97467974395824
+      },
+      "acierto_pct": 66.707,
+      "acierto_estable_pct": 67.884,
+      "reaccion_mediana_ms": 402.667,
+      "reaccion_media_ms": 907.81,
+      "reaccion_subida_mediana_ms": 226.667,
+      "reaccion_subida_max_ms": 1165.333,
+      "subidas_detectadas": 4,
+      "subidas_esperadas": 4,
+      "parpadeos_fuera_transicion": 80,
+      "segmentos_sin_acierto_sostenido": [],
+      "reacciones": [
+        {
+          "inicio_s": 0,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 23,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 25,
+          "nivel": 2,
+          "subida": true,
+          "reaccion_ms": 221.333
+        },
+        {
+          "inicio_s": 48,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 301.333
+        },
+        {
+          "inicio_s": 51,
+          "nivel": 3,
+          "subida": true,
+          "reaccion_ms": 226.667
+        },
+        {
+          "inicio_s": 74,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 1973.333
+        },
+        {
+          "inicio_s": 82,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": 402.667
+        },
+        {
+          "inicio_s": 105,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2064
+        },
+        {
+          "inicio_s": 109,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": 1165.333
+        }
+      ],
+      "con_musica": {
+        "acierto_pct": 49.222,
+        "acierto_estable_pct": 50.584,
+        "reaccion_mediana_ms": 240,
+        "reaccion_media_ms": 969.6,
+        "reaccion_subida_mediana_ms": 210.667,
+        "reaccion_subida_max_ms": 240,
+        "subidas_detectadas": 2,
+        "subidas_esperadas": 4,
+        "parpadeos_fuera_transicion": 83,
+        "segmentos_sin_acierto_sostenido": [
+          82,
+          109
+        ],
+        "reacciones": [
+          {
+            "inicio_s": 0,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 23,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 586.667
+          },
+          {
+            "inicio_s": 25,
+            "nivel": 2,
+            "subida": true,
+            "reaccion_ms": 210.667
+          },
+          {
+            "inicio_s": 48,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 218.667
+          },
+          {
+            "inicio_s": 51,
+            "nivel": 3,
+            "subida": true,
+            "reaccion_ms": 240
+          },
+          {
+            "inicio_s": 74,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 1589.333
+          },
+          {
+            "inicio_s": 82,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          },
+          {
+            "inicio_s": 105,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2589.333
+          },
+          {
+            "inicio_s": 109,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          }
+        ]
+      },
+      "escalon": {
+        "reaccion_1db_ms": 53.333,
+        "energia_rapida_1db_ms": 50.667
+      },
+      "cpu_128": {
+        "media_ms": 0.008199,
+        "p95_ms": 0.0107,
+        "iteraciones": 45000
+      }
+    },
+    {
+      "id": "p85",
+      "nombre": "Voz p85 1500ms",
+      "parametros": {
+        "id": "p85",
+        "nombre": "Voz p85 1500ms",
+        "attack": 0.03,
+        "release": 0.08,
+        "window": 1.5,
+        "percentile": 0.85
+      },
+      "calibracion": {
+        "normal_db": -13.25,
+        "fuerte_db": -5.5,
+        "thresholds": [
+          -19.0625,
+          -9.375,
+          -1.2374999999999998
+        ],
+        "hysteresis_db": 1.5,
+        "vad_db": -32.97467974395824
+      },
+      "acierto_pct": 67.189,
+      "acierto_estable_pct": 69.035,
+      "reaccion_mediana_ms": 1514.667,
+      "reaccion_media_ms": 1077.333,
+      "reaccion_subida_mediana_ms": 221.333,
+      "reaccion_subida_max_ms": 229.333,
+      "subidas_detectadas": 2,
+      "subidas_esperadas": 4,
+      "parpadeos_fuera_transicion": 5,
+      "segmentos_sin_acierto_sostenido": [
+        82,
+        109
+      ],
+      "reacciones": [
+        {
+          "inicio_s": 0,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 23,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 25,
+          "nivel": 2,
+          "subida": true,
+          "reaccion_ms": 221.333
+        },
+        {
+          "inicio_s": 48,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 1514.667
+        },
+        {
+          "inicio_s": 51,
+          "nivel": 3,
+          "subida": true,
+          "reaccion_ms": 229.333
+        },
+        {
+          "inicio_s": 74,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 1666.667
+        },
+        {
+          "inicio_s": 82,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        },
+        {
+          "inicio_s": 105,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 1754.667
+        },
+        {
+          "inicio_s": 109,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": null
+        }
+      ],
+      "con_musica": {
+        "acierto_pct": 55.582,
+        "acierto_estable_pct": 57.47,
+        "reaccion_mediana_ms": 530.667,
+        "reaccion_media_ms": 1620,
+        "reaccion_subida_mediana_ms": 418.667,
+        "reaccion_subida_max_ms": 530.667,
+        "subidas_detectadas": 2,
+        "subidas_esperadas": 4,
+        "parpadeos_fuera_transicion": 9,
+        "segmentos_sin_acierto_sostenido": [
+          82,
+          105,
+          109
+        ],
+        "reacciones": [
+          {
+            "inicio_s": 0,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 23,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 25,
+            "nivel": 2,
+            "subida": true,
+            "reaccion_ms": 418.667
+          },
+          {
+            "inicio_s": 48,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 1501.333
+          },
+          {
+            "inicio_s": 51,
+            "nivel": 3,
+            "subida": true,
+            "reaccion_ms": 530.667
+          },
+          {
+            "inicio_s": 74,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 4029.333
+          },
+          {
+            "inicio_s": 82,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          },
+          {
+            "inicio_s": 105,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": null
+          },
+          {
+            "inicio_s": 109,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          }
+        ]
+      },
+      "escalon": {
+        "reaccion_1db_ms": 226.667,
+        "energia_rapida_1db_ms": 50.667
+      },
+      "cpu_128": {
+        "media_ms": 0.012442,
+        "p95_ms": 0.0161,
+        "iteraciones": 45000
+      }
+    },
+    {
+      "id": "hybrid",
+      "nombre": "HP100 + VAD + p85",
+      "parametros": {
+        "id": "hybrid",
+        "nombre": "HP100 + VAD + p85",
+        "hp": true,
+        "attack": 0.03,
+        "release": 0.08,
+        "hold": 1.5,
+        "window": 1.5,
+        "percentile": 0.85
+      },
+      "calibracion": {
+        "normal_db": -13.5,
+        "fuerte_db": -6,
+        "thresholds": [
+          -19.125,
+          -9.75,
+          -1.875
+        ],
+        "hysteresis_db": 1.5,
+        "vad_db": -33.345120080999166
+      },
+      "acierto_pct": 94.144,
+      "acierto_estable_pct": 96.927,
+      "reaccion_mediana_ms": 360,
+      "reaccion_media_ms": 1006.476,
+      "reaccion_subida_mediana_ms": 232,
+      "reaccion_subida_max_ms": 360,
+      "subidas_detectadas": 4,
+      "subidas_esperadas": 4,
+      "parpadeos_fuera_transicion": 3,
+      "segmentos_sin_acierto_sostenido": [],
+      "reacciones": [
+        {
+          "inicio_s": 0,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 23,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2.667
+        },
+        {
+          "inicio_s": 25,
+          "nivel": 2,
+          "subida": true,
+          "reaccion_ms": 226.667
+        },
+        {
+          "inicio_s": 48,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 1826.667
+        },
+        {
+          "inicio_s": 51,
+          "nivel": 3,
+          "subida": true,
+          "reaccion_ms": 232
+        },
+        {
+          "inicio_s": 74,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 1978.667
+        },
+        {
+          "inicio_s": 82,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": 352
+        },
+        {
+          "inicio_s": 105,
+          "nivel": 1,
+          "subida": false,
+          "reaccion_ms": 2069.333
+        },
+        {
+          "inicio_s": 109,
+          "nivel": 4,
+          "subida": true,
+          "reaccion_ms": 360
+        }
+      ],
+      "con_musica": {
+        "acierto_pct": 66.653,
+        "acierto_estable_pct": 68.915,
+        "reaccion_mediana_ms": 1352,
+        "reaccion_media_ms": 1108.8,
+        "reaccion_subida_mediana_ms": 418.667,
+        "reaccion_subida_max_ms": 538.667,
+        "subidas_detectadas": 2,
+        "subidas_esperadas": 4,
+        "parpadeos_fuera_transicion": 7,
+        "segmentos_sin_acierto_sostenido": [
+          82,
+          109
+        ],
+        "reacciones": [
+          {
+            "inicio_s": 0,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 23,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 2.667
+          },
+          {
+            "inicio_s": 25,
+            "nivel": 2,
+            "subida": true,
+            "reaccion_ms": 418.667
+          },
+          {
+            "inicio_s": 48,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 1352
+          },
+          {
+            "inicio_s": 51,
+            "nivel": 3,
+            "subida": true,
+            "reaccion_ms": 538.667
+          },
+          {
+            "inicio_s": 74,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 1626.667
+          },
+          {
+            "inicio_s": 82,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          },
+          {
+            "inicio_s": 105,
+            "nivel": 1,
+            "subida": false,
+            "reaccion_ms": 1608
+          },
+          {
+            "inicio_s": 109,
+            "nivel": 4,
+            "subida": true,
+            "reaccion_ms": null
+          }
+        ]
+      },
+      "escalon": {
+        "reaccion_1db_ms": 226.667,
+        "energia_rapida_1db_ms": 50.667
+      },
+      "cpu_128": {
+        "media_ms": 0.015429,
+        "p95_ms": 0.0221,
+        "iteraciones": 45000
+      }
+    }
+  ],
+  "verificacion_local": {
+    "estado": "OK",
+    "fecha": "2026-11-08T15:08:18.432Z",
+    "metodos_anteriores": "trazas idénticas",
+    "pausa_corta": "conservada",
+    "silencio_sostenido": "nivel 1",
+    "subida_sin_silencio_ms": 242.66666666666666,
+    "paridad_worklet_simulado": [
+      {
+        "audio": "sermon-simulado.wav",
+        "mensajes_identicos": 5625
+      },
+      {
+        "audio": "sermon-con-musica.wav",
+        "mensajes_identicos": 5625
+      }
+    ],
+    "calibracion_pcm": "10 s idénticos",
+    "cambio_metodos": 10,
+    "navegador": "pendiente: Chrome rechazado por sandbox (spawn EPERM)"
+  }
+}

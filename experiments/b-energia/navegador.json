@@ -1,0 +1,17 @@
+{
+  "estado": "OK",
+  "seleccion_metodos": 10,
+  "paridad_node_navegador": [
+    {
+      "audio": "sermon-simulado.wav",
+      "bloques_identicos": 45000
+    },
+    {
+      "audio": "sermon-con-musica.wav",
+      "bloques_identicos": 45000
+    }
+  ],
+  "worklet": "bloques 128, cambio de todos los métodos",
+  "calibracion": "PCM continuo 10 s y restauración WAV",
+  "errores": []
+}

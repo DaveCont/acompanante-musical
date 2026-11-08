@@ -1,0 +1,21 @@
+{
+  "estado": "OK",
+  "fecha": "2026-11-08T15:12:52.966Z",
+  "metodos_anteriores": "trazas idénticas",
+  "pausa_corta": "conservada",
+  "silencio_sostenido": "nivel 1",
+  "subida_sin_silencio_ms": 242.66666666666666,
+  "paridad_worklet_simulado": [
+    {
+      "audio": "sermon-simulado.wav",
+      "mensajes_identicos": 5625
+    },
+    {
+      "audio": "sermon-con-musica.wav",
+      "mensajes_identicos": 5625
+    }
+  ],
+  "calibracion_pcm": "10 s idénticos",
+  "cambio_metodos": 10,
+  "navegador": "pendiente: Chrome rechazado por sandbox (spawn EPERM)"
+}

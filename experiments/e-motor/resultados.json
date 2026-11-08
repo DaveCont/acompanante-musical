@@ -1,0 +1,45 @@
+{
+  "entorno": {
+    "fecha": "2026-11-08T15:11:47.633Z",
+    "node": "v24.14.1",
+    "cpu": "Intel(R) Core(TM) i7-6820HK CPU @ 2.70GHz",
+    "plataforma": "win32"
+  },
+  "registro_callbacks_node": {
+    "golpes": 200,
+    "periodo_ms": 10,
+    "retraso_medio_ms": 454.345,
+    "retraso_p95_ms": 854.792,
+    "retraso_max_ms": 895.193,
+    "jitter_intervalo_p95_ms": 9.785
+  },
+  "navegador": {
+    "navegador": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "comparacion": [
+      {
+        "metodo": "propio",
+        "golpes": 200,
+        "jitter_programado_p95_ms": 0,
+        "jitter_programado_max_ms": 0,
+        "callback_jitter_p95_ms": 2.2000000029802322,
+        "margen_min_ms": 77.99999999999984,
+        "duracion_real_ms": 4235.10000000149,
+        "nota": "Jitter del tiempo programado y del callback; no mide latencia acústica. Lookahead 100 ms, timer 25 ms."
+      },
+      {
+        "metodo": "tone",
+        "golpes": 200,
+        "jitter_programado_p95_ms": 7.105427357601002e-12,
+        "jitter_programado_max_ms": 7.993605777301127e-12,
+        "callback_jitter_p95_ms": null,
+        "margen_min_ms": -191.33333333333331,
+        "duracion_real_ms": 4264.10000000149,
+        "nota": "Jitter del tiempo programado y del callback; no mide latencia acústica. Lookahead 100 ms, timer 25 ms."
+      }
+    ]
+  },
+  "peso_tone_kb": 343.34,
+  "peso_propio_kb": 4.817,
+  "cpu_128": "planificador por evento, no procesa muestras; coste por golpe en navegador",
+  "tone": "disponible"
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "inicio_s": 0,
+    "fin_s": 23,
+    "nivel_esperado": 1
+  },
+  {
+    "inicio_s": 23,
+    "fin_s": 25,
+    "nivel_esperado": 1
+  },
+  {
+    "inicio_s": 25,
+    "fin_s": 48,
+    "nivel_esperado": 2
+  },
+  {
+    "inicio_s": 48,
+    "fin_s": 51,
+    "nivel_esperado": 1
+  },
+  {
+    "inicio_s": 51,
+    "fin_s": 74,
+    "nivel_esperado": 3
+  },
+  {
+    "inicio_s": 74,
+    "fin_s": 82,
+    "nivel_esperado": 1
+  },
+  {
+    "inicio_s": 82,
+    "fin_s": 105,
+    "nivel_esperado": 4
+  },
+  {
+    "inicio_s": 105,
+    "fin_s": 109,
+    "nivel_esperado": 1
+  },
+  {
+    "inicio_s": 109,
+    "fin_s": 120,
+    "nivel_esperado": 4
+  }
+]

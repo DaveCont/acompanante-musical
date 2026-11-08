@@ -1,0 +1,11 @@
+{
+  "texto": "Hermanos, hoy caminamos con esperanza. La fe nos invita a servir con amor, a escuchar al que sufre y a compartir nuestro pan. Aunque llegue la tormenta, no estamos solos. Levantemos la mirada y demos gracias por un nuevo día. Hermanos, hoy caminamos con esperanza. La fe nos invita a servir con amor, a escuchar al que sufre y a compartir nuestro pan. ",
+  "silabas_aproximadas": 111,
+  "duracion_s": 18.216,
+  "silabas_por_s_aproximadas": 6.0935441370223975,
+  "rate_solicitado": "+40%",
+  "pitch_solicitado": "+0Hz",
+  "motor_real": "edge-tts",
+  "rms_dbfs": -19.999030522076186,
+  "advertencia": null
+}

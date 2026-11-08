@@ -1,0 +1,11 @@
+{
+  "texto": "Hermanos, hoy caminamos con esperanza. La fe nos invita a servir con amor, a escuchar al que sufre y a compartir nuestro pan. No estamos solos. ",
+  "silabas_aproximadas": 46,
+  "duracion_s": 15.864,
+  "silabas_por_s_aproximadas": 2.8996469994957135,
+  "rate_solicitado": "-30%",
+  "pitch_solicitado": "+0Hz",
+  "motor_real": "edge-tts",
+  "rms_dbfs": -20.094487958760414,
+  "advertencia": null
+}

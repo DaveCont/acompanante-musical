@@ -1,0 +1,24 @@
+{
+  "entorno": {
+    "fecha": "2026-11-08T15:11:20.683Z",
+    "node": "v24.14.1",
+    "cpu": "Intel(R) Core(TM) i7-6820HK CPU @ 2.70GHz",
+    "plataforma": "win32"
+  },
+  "sampleRate": 48000,
+  "canales": 1,
+  "bits": 16,
+  "duracion_s": 120,
+  "rms_dbfs": -8.693,
+  "pico_dbfs": -0.176,
+  "muestras_recortadas": 0,
+  "cpu_128": {
+    "media_ms": 0.011272,
+    "p95_ms": 0.0164,
+    "iteraciones": 2000
+  },
+  "peso_dsp_kb": 5.628,
+  "constraints": "pendiente: solo micrófono real permite comparar procesamiento ON/OFF",
+  "latencias_hardware": "pendiente de navegador/dispositivo; no inferidas del WAV",
+  "jitter": "se mide en navegador con medir-navegador.mjs"
+}

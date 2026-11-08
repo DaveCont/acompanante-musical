@@ -1,0 +1,67 @@
+{
+  "fuente": "Chrome headless, micrófono simulado por WAV; no hardware real",
+  "capturas": [
+    {
+      "constraints_solicitados": false,
+      "sampleRate": 48000,
+      "baseLatency_s": 0.01,
+      "outputLatency_s": 0.042,
+      "worklet_mensajes": 44,
+      "worklet_intervalo_media_ms": 21.102325581360695,
+      "worklet_intervalo_p95_ms": 29.399999998509884,
+      "raf_intervalo_p95_ms": 18.19999999552965,
+      "worklet_ultimo": {
+        "frame": 63744,
+        "t": 1.328,
+        "rms": -23.990380425576046,
+        "lufs": -27.33132246809153,
+        "level": 2,
+        "speed": 3,
+        "bloque": 128
+      },
+      "constraints": {
+        "autoGainControl": false,
+        "channelCount": 2,
+        "deviceId": "default",
+        "echoCancellation": false,
+        "groupId": "c2b37808d82985e327ac037f7dc7163654e3216c6942688f0acf5a7fd6668ef4",
+        "latency": 0.01,
+        "noiseSuppression": false,
+        "sampleRate": 44100,
+        "sampleSize": 16,
+        "voiceIsolation": false
+      }
+    },
+    {
+      "constraints_solicitados": true,
+      "sampleRate": 48000,
+      "baseLatency_s": 0.01,
+      "outputLatency_s": 0.042,
+      "worklet_mensajes": 47,
+      "worklet_intervalo_media_ms": 21.2217391303376,
+      "worklet_intervalo_p95_ms": 29.600000001490116,
+      "raf_intervalo_p95_ms": 17.600000001490116,
+      "worklet_ultimo": {
+        "frame": 51456,
+        "t": 1.072,
+        "rms": -17.130651676949093,
+        "lufs": -23.770672051207214,
+        "level": 2,
+        "speed": 3,
+        "bloque": 128
+      },
+      "constraints": {
+        "autoGainControl": true,
+        "channelCount": 1,
+        "deviceId": "default",
+        "echoCancellation": true,
+        "groupId": "c2b37808d82985e327ac037f7dc7163654e3216c6942688f0acf5a7fd6668ef4",
+        "latency": 0.01,
+        "noiseSuppression": true,
+        "sampleRate": 48000,
+        "sampleSize": 16,
+        "voiceIsolation": false
+      }
+    }
+  ]
+}

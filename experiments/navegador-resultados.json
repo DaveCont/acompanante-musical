@@ -1,0 +1,148 @@
+{
+  "fecha": "2026-11-08T14:56:13.264Z",
+  "fuente": "Chrome headless, micrófono simulado por WAV; no hardware real",
+  "paginas": [
+    {
+      "carpeta": "a-captura",
+      "sampleRate": 48000,
+      "baseLatency_s": 0.01,
+      "outputLatency_s": 0.042,
+      "worklet_mensajes": 33,
+      "worklet_intervalo_media_ms": 21.434374999953434,
+      "worklet_intervalo_p95_ms": 29.799999997019768,
+      "raf_intervalo_p95_ms": 17.700000002980232,
+      "worklet_ultimo": {
+        "frame": 33664,
+        "t": 0.7013333333333334,
+        "rms": -24.707177128874957,
+        "lufs": -27.867124975126426,
+        "level": 2,
+        "speed": 3,
+        "bloque": 128
+      },
+      "constraints": null
+    },
+    {
+      "carpeta": "b-energia",
+      "sampleRate": 48000,
+      "baseLatency_s": 0.01,
+      "outputLatency_s": 0.042,
+      "worklet_mensajes": 36,
+      "worklet_intervalo_media_ms": 20.65714285714286,
+      "worklet_intervalo_p95_ms": 30.69999999552965,
+      "raf_intervalo_p95_ms": 18.299999997019768,
+      "worklet_ultimo": {
+        "frame": 38656,
+        "t": 0.8053333333333333,
+        "rms": -25.581971771429878,
+        "lufs": -27.890966833643507,
+        "level": 1,
+        "speed": 3,
+        "bloque": 128
+      },
+      "constraints": null
+    },
+    {
+      "carpeta": "c-velocidad",
+      "sampleRate": 48000,
+      "baseLatency_s": 0.01,
+      "outputLatency_s": 0.042,
+      "worklet_mensajes": 38,
+      "worklet_intervalo_media_ms": 21.075675675796496,
+      "worklet_intervalo_p95_ms": 32,
+      "raf_intervalo_p95_ms": 18,
+      "worklet_ultimo": {
+        "frame": 41728,
+        "t": 0.8693333333333333,
+        "rms": -26.19953823517896,
+        "lufs": -28.769672782674466,
+        "level": 1,
+        "speed": 3,
+        "bloque": 128
+      },
+      "constraints": null
+    },
+    {
+      "carpeta": "d-pitch",
+      "sampleRate": 48000,
+      "baseLatency_s": 0.01,
+      "outputLatency_s": 0.042,
+      "worklet_mensajes": 44,
+      "worklet_intervalo_media_ms": 20.439534883859547,
+      "worklet_intervalo_p95_ms": 32.5,
+      "raf_intervalo_p95_ms": 23.30000000447035,
+      "worklet_ultimo": {
+        "frame": 47872,
+        "t": 0.9973333333333333,
+        "rms": -28.052527099847367,
+        "lufs": -32.647345519013776,
+        "level": 1,
+        "speed": 3,
+        "bloque": 128
+      },
+      "constraints": null
+    },
+    {
+      "carpeta": "e-motor",
+      "sampleRate": 48000,
+      "baseLatency_s": 0.01,
+      "outputLatency_s": 0.042,
+      "worklet_mensajes": 38,
+      "worklet_intervalo_media_ms": 21.335135135094863,
+      "worklet_intervalo_p95_ms": 30.100000001490116,
+      "raf_intervalo_p95_ms": 18,
+      "worklet_ultimo": {
+        "frame": 41216,
+        "t": 0.8586666666666667,
+        "rms": -26.19953823517896,
+        "lufs": -28.769672782674466,
+        "level": 1,
+        "speed": 3,
+        "bloque": 128
+      },
+      "constraints": null
+    },
+    {
+      "carpeta": "f-sonido",
+      "sampleRate": 48000,
+      "baseLatency_s": 0.01,
+      "outputLatency_s": 0.042,
+      "worklet_mensajes": 38,
+      "worklet_intervalo_media_ms": 21.3459459458654,
+      "worklet_intervalo_p95_ms": 29.799999997019768,
+      "raf_intervalo_p95_ms": 17.399999998509884,
+      "worklet_ultimo": {
+        "frame": 41216,
+        "t": 0.8586666666666667,
+        "rms": -26.19953823517896,
+        "lufs": -28.769672782674466,
+        "level": 1,
+        "speed": 3,
+        "bloque": 128
+      },
+      "constraints": null
+    },
+    {
+      "carpeta": "g-retro",
+      "sampleRate": 48000,
+      "baseLatency_s": 0.01,
+      "outputLatency_s": 0.042,
+      "worklet_mensajes": 37,
+      "worklet_intervalo_media_ms": 21.300000000124175,
+      "worklet_intervalo_p95_ms": 26.299999997019768,
+      "raf_intervalo_p95_ms": 18.099999994039536,
+      "worklet_ultimo": {
+        "frame": 40192,
+        "t": 0.8373333333333334,
+        "rms": -25.89072865188794,
+        "lufs": -28.211868266152152,
+        "level": 1,
+        "speed": 3,
+        "bloque": 128
+      },
+      "constraints": null
+    }
+  ],
+  "navegador": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "errores_js": []
+}

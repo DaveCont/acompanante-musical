@@ -1,0 +1,64 @@
+{
+  "entorno": {
+    "fecha": "2026-11-08T15:12:10.483Z",
+    "node": "v24.14.1",
+    "cpu": "Intel(R) Core(TM) i7-6820HK CPU @ 2.70GHz",
+    "plataforma": "win32"
+  },
+  "sin_mitigacion_musica": {
+    "nivel_ge2_pct": 72.144,
+    "acierto_pct": 23.053,
+    "deteccion_voz_ge2_pct": 72.033,
+    "max_nivel": 2,
+    "parpadeos": 120
+  },
+  "sin_mitigacion_mezcla": {
+    "nivel_ge2_pct": 77.662,
+    "acierto_pct": 50.053,
+    "deteccion_voz_ge2_pct": 95.607,
+    "max_nivel": 3,
+    "parpadeos": 102
+  },
+  "gate_musica": {
+    "nivel_ge2_pct": 38.498,
+    "acierto_pct": 28.056,
+    "deteccion_voz_ge2_pct": 38.247,
+    "max_nivel": 2,
+    "parpadeos": 90
+  },
+  "gate_mezcla": {
+    "nivel_ge2_pct": 62.164,
+    "acierto_pct": 85.458,
+    "deteccion_voz_ge2_pct": 90.807,
+    "max_nivel": 4,
+    "parpadeos": 96
+  },
+  "resta_ideal_musica": {
+    "nivel_ge2_pct": 0,
+    "acierto_pct": 33.333,
+    "deteccion_voz_ge2_pct": 0,
+    "max_nivel": 1,
+    "parpadeos": 0
+  },
+  "resta_ideal_mezcla": {
+    "nivel_ge2_pct": 63.676,
+    "acierto_pct": 62.191,
+    "deteccion_voz_ge2_pct": 92.653,
+    "max_nivel": 3,
+    "parpadeos": 70
+  },
+  "resta_error_5ms_10pct": {
+    "nivel_ge2_pct": 97.902,
+    "acierto_pct": 47.822,
+    "deteccion_voz_ge2_pct": 100,
+    "max_nivel": 4,
+    "parpadeos": 117
+  },
+  "error_reconstruccion_rms_dbfs": -95.847,
+  "cpu_resta_128": {
+    "media_ms": 0.002765,
+    "p95_ms": 0.0035,
+    "iteraciones": 2000
+  },
+  "peso_dsp_kb": 5.628
+}

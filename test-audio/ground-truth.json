@@ -1,0 +1,117 @@
+{
+  "sample_rate": 48000,
+  "canales": 1,
+  "bits": 16,
+  "voz_solicitada": "es-MX-JorgeNeural",
+  "silabas_metodo": "grupos vocálicos españoles; aproximación, sin alineación",
+  "archivos": {
+    "voz-normal.wav": {
+      "texto": "Hermanos, hoy caminamos con esperanza. La fe nos invita a servir con amor, a escuchar al que sufre y a compartir nuestro pan. Aunque llegue la tormenta, no estamos solos. Levantemos la mirada y demos gracias por un nuevo día. ",
+      "silabas_aproximadas": 71,
+      "duracion_s": 16.44,
+      "silabas_por_s_aproximadas": 4.318734793187348,
+      "rate_solicitado": "+0%",
+      "pitch_solicitado": "+0Hz",
+      "motor_real": "edge-tts",
+      "rms_dbfs": -19.9177661608671,
+      "advertencia": null
+    },
+    "voz-rapida.wav": {
+      "texto": "Hermanos, hoy caminamos con esperanza. La fe nos invita a servir con amor, a escuchar al que sufre y a compartir nuestro pan. Aunque llegue la tormenta, no estamos solos. Levantemos la mirada y demos gracias por un nuevo día. Hermanos, hoy caminamos con esperanza. La fe nos invita a servir con amor, a escuchar al que sufre y a compartir nuestro pan. ",
+      "silabas_aproximadas": 111,
+      "duracion_s": 18.216,
+      "silabas_por_s_aproximadas": 6.0935441370223975,
+      "rate_solicitado": "+40%",
+      "pitch_solicitado": "+0Hz",
+      "motor_real": "edge-tts",
+      "rms_dbfs": -19.999030522076186,
+      "advertencia": null
+    },
+    "voz-lenta.wav": {
+      "texto": "Hermanos, hoy caminamos con esperanza. La fe nos invita a servir con amor, a escuchar al que sufre y a compartir nuestro pan. No estamos solos. ",
+      "silabas_aproximadas": 46,
+      "duracion_s": 15.864,
+      "silabas_por_s_aproximadas": 2.8996469994957135,
+      "rate_solicitado": "-30%",
+      "pitch_solicitado": "+0Hz",
+      "motor_real": "edge-tts",
+      "rms_dbfs": -20.094487958760414,
+      "advertencia": null
+    },
+    "voz-efusiva.wav": {
+      "texto": "Hermanos, hoy caminamos con esperanza. La fe nos invita a servir con amor, a escuchar al que sufre y a compartir nuestro pan. Aunque llegue la tormenta, no estamos solos. Levantemos la mirada y demos gracias por un nuevo día. Hermanos, hoy caminamos con esperanza. La fe nos invita a servir con amor, a escuchar al que sufre y a compartir nuestro pan. ",
+      "silabas_aproximadas": 111,
+      "duracion_s": 18.216,
+      "silabas_por_s_aproximadas": 6.0935441370223975,
+      "rate_solicitado": "+40%",
+      "pitch_solicitado": "+25Hz",
+      "motor_real": "edge-tts",
+      "rms_dbfs": -19.972651929894425,
+      "advertencia": null
+    }
+  },
+  "edge_tts_error": null,
+  "duracion_sermon_s": 120.0,
+  "segmentos_voz": [
+    {
+      "inicio_s": 0,
+      "fin_s": 23,
+      "nivel_esperado": 1,
+      "rms_dbfs_medido": -30.006083021758357
+    },
+    {
+      "inicio_s": 25,
+      "fin_s": 48,
+      "nivel_esperado": 2,
+      "rms_dbfs_medido": -18.00599798451327
+    },
+    {
+      "inicio_s": 51,
+      "fin_s": 74,
+      "nivel_esperado": 3,
+      "rms_dbfs_medido": -10.00504688031588
+    },
+    {
+      "inicio_s": 82,
+      "fin_s": 105,
+      "nivel_esperado": 4,
+      "rms_dbfs_medido": -4.000401495028641
+    },
+    {
+      "inicio_s": 109,
+      "fin_s": 120,
+      "nivel_esperado": 4,
+      "rms_dbfs_medido": -4.004650201688654
+    }
+  ],
+  "musica_rms_dbfs": -20.0,
+  "ganancia_mezcla": 0.7827255020541293,
+  "referencia_resta": "mezcla / ganancia_mezcla - musica-sola; alineación digital ideal",
+  "tonos": [
+    {
+      "inicio_s": 0,
+      "fin_s": 1,
+      "hz": 110
+    },
+    {
+      "inicio_s": 1,
+      "fin_s": 2,
+      "hz": 196
+    },
+    {
+      "inicio_s": 2,
+      "fin_s": 3,
+      "hz": 261.625565
+    },
+    {
+      "inicio_s": 3,
+      "fin_s": 4,
+      "hz": 440
+    },
+    {
+      "inicio_s": 4,
+      "fin_s": 5,
+      "hz": 880
+    }
+  ]
+}

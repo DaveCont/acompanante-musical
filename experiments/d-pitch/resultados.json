@@ -1,0 +1,274 @@
+{
+  "entorno": {
+    "fecha": "2026-11-08T15:11:44.700Z",
+    "node": "v24.14.1",
+    "cpu": "Intel(R) Core(TM) i7-6820HK CPU @ 2.70GHz",
+    "plataforma": "win32"
+  },
+  "comparacion": [
+    {
+      "metodo": "YIN propio",
+      "tonos": [
+        {
+          "hz": 110,
+          "error_mae_hz": 0,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 196,
+          "error_mae_hz": 0.002,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 261.625565,
+          "error_mae_hz": 0.001,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 440,
+          "error_mae_hz": 0.018,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 880,
+          "error_mae_hz": 0.053,
+          "sin_deteccion": 0
+        }
+      ],
+      "mae_tonos_hz": 0.015,
+      "voz_sintetica": [
+        {
+          "f0": 110,
+          "hz": 110,
+          "error_hz": 0
+        },
+        {
+          "f0": 160,
+          "hz": 159.999,
+          "error_hz": 0.001
+        },
+        {
+          "f0": 220,
+          "hz": 220.002,
+          "error_hz": 0.002
+        },
+        {
+          "f0": 300,
+          "hz": 300.001,
+          "error_hz": 0.001
+        }
+      ],
+      "mae_voz_sintetica_hz": 0.001,
+      "tts_diferencia_vs_yin_hz": 0,
+      "tts_frames": 15,
+      "cpu_ventana_2048_hop128": {
+        "media_ms": 5.67525,
+        "p95_ms": 8.1389,
+        "iteraciones": 120
+      },
+      "cpu_ms_por_muestra": 0.04433789,
+      "presupuesto_ms_hop128": 212.822,
+      "latencia_ventana_ms": 42.667
+    },
+    {
+      "metodo": "Autocorrelación propia",
+      "tonos": [
+        {
+          "hz": 110,
+          "error_mae_hz": 0,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 196,
+          "error_mae_hz": 0,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 261.625565,
+          "error_mae_hz": 0,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 440,
+          "error_mae_hz": 0,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 880,
+          "error_mae_hz": 0.001,
+          "sin_deteccion": 0
+        }
+      ],
+      "mae_tonos_hz": 0,
+      "voz_sintetica": [
+        {
+          "f0": 110,
+          "hz": 110,
+          "error_hz": 0
+        },
+        {
+          "f0": 160,
+          "hz": 159.998,
+          "error_hz": 0.002
+        },
+        {
+          "f0": 220,
+          "hz": 220,
+          "error_hz": 0
+        },
+        {
+          "f0": 300,
+          "hz": 299.995,
+          "error_hz": 0.005
+        }
+      ],
+      "mae_voz_sintetica_hz": 0.002,
+      "tts_diferencia_vs_yin_hz": 0.041,
+      "tts_frames": 15,
+      "cpu_ventana_2048_hop128": {
+        "media_ms": 14.820888,
+        "p95_ms": 17.2788,
+        "iteraciones": 120
+      },
+      "cpu_ms_por_muestra": 0.11578819,
+      "presupuesto_ms_hop128": 555.783,
+      "latencia_ventana_ms": 42.667
+    },
+    {
+      "metodo": "pitchy",
+      "tonos": [
+        {
+          "hz": 110,
+          "error_mae_hz": 0,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 196,
+          "error_mae_hz": 0,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 261.625565,
+          "error_mae_hz": 0,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 440,
+          "error_mae_hz": 0,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 880,
+          "error_mae_hz": 0.002,
+          "sin_deteccion": 0
+        }
+      ],
+      "mae_tonos_hz": 0,
+      "voz_sintetica": [
+        {
+          "f0": 110,
+          "hz": 109.999,
+          "error_hz": 0.001
+        },
+        {
+          "f0": 160,
+          "hz": 159.998,
+          "error_hz": 0.002
+        },
+        {
+          "f0": 220,
+          "hz": 219.998,
+          "error_hz": 0.002
+        },
+        {
+          "f0": 300,
+          "hz": 299.996,
+          "error_hz": 0.004
+        }
+      ],
+      "mae_voz_sintetica_hz": 0.002,
+      "tts_diferencia_vs_yin_hz": 0.34,
+      "tts_frames": 10,
+      "cpu_ventana_2048_hop128": {
+        "media_ms": 0.875241,
+        "p95_ms": 1.0664,
+        "iteraciones": 120
+      },
+      "cpu_ms_por_muestra": 0.00683782,
+      "presupuesto_ms_hop128": 32.822,
+      "latencia_ventana_ms": 42.667
+    },
+    {
+      "metodo": "Meyda centroid (NO F0)",
+      "tonos": [
+        {
+          "hz": 110,
+          "error_mae_hz": 8.678,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 196,
+          "error_mae_hz": 7.676,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 261.625565,
+          "error_mae_hz": 7.717,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 440,
+          "error_mae_hz": 7.239,
+          "sin_deteccion": 0
+        },
+        {
+          "hz": 880,
+          "error_mae_hz": 4.092,
+          "sin_deteccion": 0
+        }
+      ],
+      "mae_tonos_hz": 7.08,
+      "voz_sintetica": [
+        {
+          "f0": 110,
+          "hz": 696.033,
+          "error_hz": 586.033
+        },
+        {
+          "f0": 160,
+          "hz": 768.806,
+          "error_hz": 608.806
+        },
+        {
+          "f0": 220,
+          "hz": 852.862,
+          "error_hz": 632.862
+        },
+        {
+          "f0": 300,
+          "hz": 964.228,
+          "error_hz": 664.228
+        }
+      ],
+      "mae_voz_sintetica_hz": 622.982,
+      "tts_diferencia_vs_yin_hz": 1219.452,
+      "tts_frames": 15,
+      "cpu_ventana_2048_hop128": {
+        "media_ms": 1.409948,
+        "p95_ms": 2.0632,
+        "iteraciones": 120
+      },
+      "cpu_ms_por_muestra": 0.01101522,
+      "presupuesto_ms_hop128": 52.873,
+      "latencia_ventana_ms": 42.667
+    }
+  ],
+  "pendientes": [
+    "Meyda: no expone estimador F0; se mide spectralCentroid como descriptor NO equivalente"
+  ],
+  "peso": {
+    "propio_kb": 5.628,
+    "pitchy_kb": 8.59,
+    "meyda_kb": 16.373
+  }
+}

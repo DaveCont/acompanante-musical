@@ -1,0 +1,9 @@
+import {audio,json,bench,report,round,kb} from '../shared/node.mjs';
+import {syllablePeaks,SyllableCounter,mean} from '../shared/dsp.mjs';
+const gt=json('ground-truth.json'),rows=[];
+for(const name of ['voz-normal.wav','voz-rapida.wav','voz-lenta.wav']) {
+  const {samples:x,sampleRate:sr}=audio(name),truth=gt.archivos[name],peaks=syllablePeaks(x,sr);
+  const c=new SyllableCounter(),rate=peaks.length/(x.length/sr),expected=truth.silabas_por_s_aproximadas;
+  rows.push({archivo:name,picos:peaks.length,silabas_aprox:truth.silabas_aproximadas,tasa_estimada:round(rate),tasa_aprox_referencia:round(expected),error_pct:round(100*(rate-expected)/expected),error_absoluto_pct:round(100*Math.abs(rate-expected)/expected),cpu_128:bench(()=>c.process(x.subarray(48000,48128)),1000)});
+}
+report('c-velocidad',{comparacion:rows,error_absoluto_medio_pct:round(mean(rows.map(r=>r.error_absoluto_pct))),banda_hz:[2,10],retardo_algoritmico_ms:10,refractario_ms:100,peso_dsp_kb:kb('shared/dsp.mjs'),speech_wifi:'pendiente de prueba física con wifi apagado; speech.html registra errores y texto'},`Picos de envolvente: diferencia de LP 10 Hz y 2 Hz, muestreo de envolvente 100 Hz, refractario 100 ms.\n\n|Archivo|Picos|Sílabas aproximadas|Estimado /s|Referencia /s|Error %|CPU ms/128|\n|---|---:|---:|---:|---:|---:|---:|\n${rows.map(r=>`|${r.archivo}|${r.picos}|${r.silabas_aprox}|${r.tasa_estimada}|${r.tasa_aprox_referencia}|${r.error_pct}|${r.cpu_128.media_ms}|`).join('\n')}\n\nRetardo mínimo de decisión de pico: 10 ms más los filtros; actualización 10 ms, cuantización <=10 ms. Peso DSP ${kb('shared/dsp.mjs')} KiB. La referencia cuenta grupos vocálicos del texto; su error lingüístico no está cuantificado y no constituye conteo fonético exacto.\n\n[Web Speech](./speech.html): comprobar con wifi apagado en dispositivo; disponibilidad de la API no demuestra que funcione offline. El botón solicitará reconocimiento local cuando el navegador lo permita.`);

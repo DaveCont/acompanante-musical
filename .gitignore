@@ -2,3 +2,6 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+.cache/
+experiments/.browser/
+experiments/.browser-direct/

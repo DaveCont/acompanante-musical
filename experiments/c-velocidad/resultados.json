@@ -1,0 +1,61 @@
+{
+  "entorno": {
+    "fecha": "2026-11-08T15:11:38.658Z",
+    "node": "v24.14.1",
+    "cpu": "Intel(R) Core(TM) i7-6820HK CPU @ 2.70GHz",
+    "plataforma": "win32"
+  },
+  "comparacion": [
+    {
+      "archivo": "voz-normal.wav",
+      "picos": 56,
+      "silabas_aprox": 71,
+      "tasa_estimada": 3.406,
+      "tasa_aprox_referencia": 4.319,
+      "error_pct": -21.127,
+      "error_absoluto_pct": 21.127,
+      "cpu_128": {
+        "media_ms": 0.021066,
+        "p95_ms": 0.0522,
+        "iteraciones": 1000
+      }
+    },
+    {
+      "archivo": "voz-rapida.wav",
+      "picos": 76,
+      "silabas_aprox": 111,
+      "tasa_estimada": 4.172,
+      "tasa_aprox_referencia": 6.094,
+      "error_pct": -31.532,
+      "error_absoluto_pct": 31.532,
+      "cpu_128": {
+        "media_ms": 0.016207,
+        "p95_ms": 0.0312,
+        "iteraciones": 1000
+      }
+    },
+    {
+      "archivo": "voz-lenta.wav",
+      "picos": 46,
+      "silabas_aprox": 46,
+      "tasa_estimada": 2.9,
+      "tasa_aprox_referencia": 2.9,
+      "error_pct": 0,
+      "error_absoluto_pct": 0,
+      "cpu_128": {
+        "media_ms": 0.015631,
+        "p95_ms": 0.0531,
+        "iteraciones": 1000
+      }
+    }
+  ],
+  "error_absoluto_medio_pct": 17.553,
+  "banda_hz": [
+    2,
+    10
+  ],
+  "retardo_algoritmico_ms": 10,
+  "refractario_ms": 100,
+  "peso_dsp_kb": 5.628,
+  "speech_wifi": "pendiente de prueba física con wifi apagado; speech.html registra errores y texto"
+}

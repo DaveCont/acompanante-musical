@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import {performance} from 'node:perf_hooks';
+import {report,round,kb,ROOT} from '../shared/node.mjs';
+import {mean,percentile} from '../shared/dsp.mjs';
+// Registro real de callbacks Node: distinto del reloj de AudioContext del navegador.
+const intervals=[],lateness=[],base=performance.now()+30,count=200,period=10;
+let last;
+await new Promise(resolve=>{let i=0;const tick=()=>{const now=performance.now(),expected=base+i*period;if(now<expected){setTimeout(tick,Math.max(0,expected-now));return;}lateness.push(now-expected);if(last!=null)intervals.push(now-last);last=now;i++;if(i===count)resolve();else setTimeout(tick,Math.max(0,base+i*period-performance.now()));};tick();});
+const browserPath=ROOT+'experiments/e-motor/navegador.json';
+const result={registro_callbacks_node:{golpes:count,periodo_ms:period,retraso_medio_ms:round(mean(lateness)),retraso_p95_ms:round(percentile(lateness,.95)),retraso_max_ms:round(Math.max(...lateness)),jitter_intervalo_p95_ms:round(percentile(intervals.map(v=>Math.abs(v-period)),.95))},navegador:fs.existsSync(browserPath)?JSON.parse(fs.readFileSync(browserPath,'utf8')):null,peso_tone_kb:kb('vendor/tone.min.js'),peso_propio_kb:kb('shared/sound.mjs'),cpu_128:'planificador por evento, no procesa muestras; coste por golpe en navegador',tone:kb('vendor/tone.min.js')?'disponible':'pendiente: instalación npm bloqueada'};
+report('e-motor',result,`Registro real de ${count} callbacks Node a ${period} ms: retraso medio ${result.registro_callbacks_node.retraso_medio_ms} ms; p95 ${result.registro_callbacks_node.retraso_p95_ms} ms; jitter de intervalo p95 ${result.registro_callbacks_node.jitter_intervalo_p95_ms} ms. Son callbacks del sistema, no golpes del reloj de audio.\n\nLa página programa 200 golpes a 20 ms con lookahead 100 ms, timer 25 ms y AudioContext; registra tiempos esperados/programados y margen. Comparación Tone: ${result.tone}. Peso propio ${result.peso_propio_kb} KiB; Tone ${result.peso_tone_kb??'pendiente'} KiB. CPU/128: no aplica al planificador por evento; latencia acústica pendiente de dispositivo.\n\nRegistro navegador: ${result.navegador?JSON.stringify(result.navegador):'pendiente de medir-navegador.mjs'}.`);

@@ -1,0 +1,17 @@
+{
+  "tone": {
+    "estado": "listo",
+    "version": "15.1.22",
+    "kib": 343.33984375
+  },
+  "pitchy": {
+    "estado": "listo",
+    "version": "4.1.0",
+    "kib": 8.58984375
+  },
+  "meyda": {
+    "estado": "listo",
+    "version": "5.6.3",
+    "kib": 16.373046875
+  }
+}
