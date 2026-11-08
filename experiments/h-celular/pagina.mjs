@@ -5,9 +5,9 @@ import {decodeWav} from '../shared/wav.mjs';
 import {scheduleProgression,LOOP_SECONDS} from '../shared/sound.mjs';
 
 const $=s=>document.querySelector(s);
-let ctx,stream,source,worklet,musicGain,loopTimer=null,nextLoop=0,config,last=null,leakTest=null;
+let historia=[],libre=null,musicaObjetivo=0,ctx,stream,source,worklet,musicGain,loopTimer=null,nextLoop=0,config,last=null,leakTest=null;
 const VOL_POR_NIVEL=[0,.3,.5,.75,1]; // volumen relativo de la música para niveles 1–4
-const status=s=>{$('#status').textContent=s;};
+const status=s=>{$('#status').textContent=s;const f=$('#fijomsg');if(f)f.textContent=s;};
 const log=x=>{$('#log').textContent=JSON.stringify(x,null,2);};
 const safely=fn=>async()=>{try{await fn();}catch(e){status('Error: '+e.message);log({error:String(e.stack||e)});fallo(diag?.paso??'acción',e);}};
 
@@ -88,7 +88,7 @@ function volumenMusica(){
   const base=+$('#volumen').value,nivel=last?.level??2;
   const objetivo=$('#reacciona').checked?base*VOL_POR_NIVEL[nivel]:base;
   // Rampa suave de 0,5 s: nunca cortes bruscos.
-  musicGain.gain.setTargetAtTime(objetivo,ctx.currentTime,.5/3);
+  musicaObjetivo=objetivo;musicGain.gain.setTargetAtTime(objetivo,ctx.currentTime,.5/3);
 }
 
 function tocarMusica(){
@@ -100,6 +100,7 @@ function tocarMusica(){
   tick();loopTimer=setInterval(tick,250);volumenMusica();
 }
 function pararMusica(){
+  musicaObjetivo=0;
   if(loopTimer!==null){clearInterval(loopTimer);loopTimer=null;}
   if(musicGain&&ctx){musicGain.gain.cancelScheduledValues(ctx.currentTime);musicGain.gain.setTargetAtTime(0,ctx.currentTime,.15);}
 }
@@ -108,6 +109,15 @@ function mostrar(d){
   const anterior=last?.level;last=d;
   const n=$('#nivel');n.className='n'+d.level;n.firstChild.textContent=d.level;
   if(d.level!==anterior)volumenMusica();
+  // Barra fija de arriba e historial de 30 s.
+  $('#minivoz').style.width=Math.max(0,Math.min(100,(d.fast_db+70)/70*100))+'%';
+  $('#minimusica').style.width=Math.min(100,musicaObjetivo*100)+'%';
+  $('#fijoestado').textContent=(d.voice?'🗣 hablando':'… silencio')+(loopTimer!==null?' · ♪ música':' · sin música');
+  const ahora=performance.now()/1000;historia.push({t:ahora,level:d.level,voice:d.voice,musica:musicaObjetivo});
+  while(historia.length&&historia[0].t<ahora-30)historia.shift();
+  if(diag.mensajes_procesador%3===0)dibujarHistoria(ahora);
+  if(libre){libre.muestras.push({level:d.level,voice:d.voice});const r=30-(ahora-libre.inicio);
+    if(r>0)$('#libre').textContent=`Predicando… ${r.toFixed(0)} s`;else terminarLibre();}
   const vals={'Energía dB':d.db.toFixed(1),'Rápida dB':d.fast_db.toFixed(1),'¿Voz?':d.voice?'sí':'no','Silencio s':d.silencio_s.toFixed(1)};
   $('#metrics').replaceChildren(...Object.entries(vals).map(([k,v])=>{const e=document.createElement('div');e.className='metric';e.textContent=k;const b=document.createElement('strong');b.textContent=v;e.append(b);return e;}));
   const c=$('#barra'),g=c.getContext('2d'),x=db=>Math.max(0,Math.min(c.width,(db+70)/70*c.width));
@@ -121,6 +131,24 @@ function mostrar(d){
   }
 }
 
+function dibujarHistoria(ahora){
+  const c=$('#historia'),g=c.getContext('2d'),W=c.width,H=c.height,col=['#000','#2d4a66','#1f8a6a','#c9a227','#d04a4a'];
+  g.clearRect(0,0,W,H);g.fillStyle='#08101b';g.fillRect(0,0,W,H);
+  g.fillStyle='#ffffff55';g.font='22px system-ui';for(let n=1;n<=4;n++)g.fillText(n,4,H-(n/4)*H*.85+18);
+  for(const h of historia){const x=W-(ahora-h.t)/30*W,alto=h.level/4*H*.85;g.fillStyle=col[h.level];g.fillRect(x,H-alto,4,alto);}
+  g.strokeStyle='#b48cf0';g.lineWidth=4;g.beginPath();
+  historia.forEach((h,i)=>{const x=W-(ahora-h.t)/30*W,y=H-h.musica*H*.85;i?g.lineTo(x,y):g.moveTo(x,y);});g.stroke();
+}
+function terminarLibre(){
+  const m=libre.muestras;libre=null;$('#libre').textContent='▶ Repetir prueba libre (30 s)';
+  const pct=f=>100*m.filter(f).length/m.length,cambios=m.filter((d,i)=>i&&d.level!==m[i-1].level).length;
+  const r={nivel1:pct(d=>d.level===1),nivel2:pct(d=>d.level===2),nivel3:pct(d=>d.level===3),nivel4:pct(d=>d.level===4),cambios_de_nivel:cambios,alto_sin_voz:pct(d=>d.level>=3&&!d.voice)};
+  diag.prueba_libre=(diag.prueba_libre||[]).concat({...Object.fromEntries(Object.entries(r).map(([k,v])=>[k,Math.round(v)])),eco:$('#aec').checked});
+  $('#librever').textContent=`Tiempo en cada nivel: 1 → ${r.nivel1.toFixed(0)} %, 2 → ${r.nivel2.toFixed(0)} %, 3 → ${r.nivel3.toFixed(0)} %, 4 → ${r.nivel4.toFixed(0)} %
+Cambios de nivel: ${cambios} (pocos = estable; muchos = parpadea)
+Nivel alto (3–4) sin que hablaras: ${r.alto_sin_voz.toFixed(0)} % (debería ser casi 0)
+¿El nivel subió cuando tú subiste? Dímelo en el chat.`;
+}
 function terminarFuga(){
   const m=leakTest.muestras;leakTest=null;
   const pct=(f)=>100*m.filter(f).length/m.length;
@@ -143,10 +171,11 @@ $('#musica').onclick=safely(async()=>tocarMusica());
 $('#parar').onclick=()=>pararMusica();
 $('#volumen').oninput=()=>volumenMusica();
 $('#reacciona').onchange=()=>volumenMusica();
+$('#libre').onclick=()=>{if(!worklet){status('Primero inicia el micrófono (sección 1).');$('#librever').textContent='Primero toca ▶ Iniciar micrófono en la sección 1.';return;}if(loopTimer===null)tocarMusica();$('#librever').textContent='';libre={inicio:performance.now()/1000,muestras:[]};};
 $('#fuga').onclick=()=>{if(!worklet){status('Primero inicia el micrófono.');return;}if(loopTimer===null)tocarMusica();$('#veredicto').className='';leakTest={inicio:performance.now(),muestras:[]};};
 
 // Versión visible, para confirmar que el teléfono no muestra una copia vieja.
-const VERSION='v4 (2026-11-08)';
+const VERSION='v5 (2026-11-08)';
 // Revisión del navegador al cargar.
 const ua=navigator.userAgent;
 diag.compatibilidad={

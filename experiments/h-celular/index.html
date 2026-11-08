@@ -6,8 +6,11 @@
 <link rel="stylesheet" href="../shared/style.css">
 <style>
   body{padding:16px}
-  #nivel{font-size:5rem;font-weight:800;text-align:center;padding:10px;border-radius:14px;background:#1b3046;margin:10px 0;transition:background .3s}
-  #nivel small{display:block;font-size:1rem;font-weight:400;color:#cfe}
+  #fijo{position:sticky;top:0;z-index:5;background:#0b1321;padding:6px 0;display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center}
+  #nivel{font-size:3.2rem;font-weight:800;text-align:center;padding:4px;border-radius:14px;background:#1b3046;transition:background .3s}
+  #fijo .info{font-size:.95rem;line-height:1.4}
+  .mini{background:#08101b;border-radius:6px;height:16px;overflow:hidden;margin:3px 0}.mini div{height:100%;width:0}
+  #nivel small{display:block;font-size:.75rem;font-weight:400;color:#cfe}
   .n1{background:#1b3046!important}.n2{background:#1f5a4a!important}.n3{background:#7a6a1f!important}.n4{background:#8a2f2f!important}
   button{width:100%;font-size:1.15rem}
   .fila{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -23,6 +26,15 @@
      Sube el volumen del teléfono. En iPhone: quita el modo silencio y el "Aislamiento de voz" (Centro de Control → Modo de micrófono → Estándar).</p>
 
   <p id="compat" class="mal" style="white-space:pre-wrap">⚠ El código de la página no cargó. Recarga la página o ábrela en Safari/Chrome (no dentro de WhatsApp/Facebook).</p>
+  <!-- Siempre visible arriba, aunque bajes por la página -->
+  <div id="fijo">
+    <div id="nivel">–<small>nivel</small></div>
+    <div class="info">
+      Tu voz <div class="mini"><div id="minivoz" style="background:#eac76f"></div></div>
+      Música <div class="mini"><div id="minimusica" style="background:#b48cf0"></div></div>
+      <span id="fijoestado">Micrófono apagado</span><br><b id="fijomsg" style="color:#e2ca89"></b>
+    </div>
+  </div>
   <section class="panel">
     <h2>1 · Opciones del micrófono</h2>
     <label><input id="aec" type="checkbox" checked> Cancelación de eco (recomendado en celular)</label><br>
@@ -39,7 +51,6 @@
     <textarea id="diagtexto" hidden readonly style="width:100%;height:180px;font-size:.8rem;background:#08101b;color:#cfe"></textarea>
   </section>
 
-  <div id="nivel">–<small>nivel detectado</small></div>
   <canvas id="barra" width="1000" height="120" aria-label="Energía de la voz y umbrales"></canvas>
   <div class="grid" id="metrics"></div>
 
@@ -66,11 +77,16 @@
 
   <section class="panel">
     <h2>5 · Prueba libre</h2>
-    <p>Con la música sonando, predica: habla suave, luego sube. Mira si el nivel te sigue a ti y no a la música.
+    <p>Pulsa el botón y predica 30 s: empieza suave, sube poco a poco hasta el clímax y termina con una pausa.
+       La gráfica muestra tu nivel (barras de color) y el volumen de la música (línea morada).</p>
+    <button id="libre">▶ Empezar prueba libre (30 s)</button>
+    <canvas id="historia" width="1000" height="200" aria-label="Historial de nivel y música" style="height:160px"></canvas>
+    <p id="librever" style="white-space:pre-wrap"></p>
+    <p>
        Prueba también con audífonos con cable para comparar.</p>
   </section>
 
   <details><summary>Datos técnicos</summary><pre id="log"></pre></details>
-  <script type="module" src="./pagina.mjs?v=4"></script>
+  <script type="module" src="./pagina.mjs?v=5"></script>
 </body>
 </html>
